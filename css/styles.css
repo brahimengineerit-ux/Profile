@@ -317,6 +317,7 @@ a:hover {
     display: flex;
     align-items: center;
     margin-bottom: 1em;
+    margin-top:1em;
     padding: 0.8em 1em;
     background-color: var(--bg-card);
     border-left: 4px solid var(--color-purple);
