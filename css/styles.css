@@ -122,7 +122,7 @@ body {
     background: linear-gradient(to bottom, var(--sidebar-bg-start) 0%, var(--sidebar-bg-end) 100%);
     border-right: 0px solid #2a2a2a;
     box-shadow: 0px 0 12px rgba(0,0,0,0.3);
-    padding: 188px 35px;
+    padding: 78px 35px;
     position: fixed;
     height: 100vh;
     overflow-y: auto;
@@ -131,7 +131,7 @@ body {
 }
 
 .sidebar h1 {
-    font-size: 2em;
+    font-size: 1.6em;
     font-weight: 400;
     margin-bottom: 0.2em;
     color: var(--sidebar-text);
@@ -140,9 +140,9 @@ body {
 }
 
 .sidebar .subtitle {
-    font-size: 0.95em;
+    font-size: 1.4em;
     color: #d0d0d0;
-    margin-bottom: 3.5em;
+    margin-bottom: 2em;
     line-height: 1.6;
     font-style: italic;
     letter-spacing: 0.3px;
@@ -200,6 +200,27 @@ body {
 .sidebar nav a.active::before {
     opacity: 1;
     left: 0;
+}
+
+.sidebar-quote {
+    font-size: 0.85em;
+    font-style: italic;
+    color: #b0b0b0;
+    line-height: 1.6;
+    border-left: 2px solid #7db8ff;
+    padding-left: 1em;
+    margin-bottom: 2em;
+    opacity: 0.8;
+    position: relative;
+}
+
+.sidebar-quote::before {
+    content: '"';
+    font-size: 1.5em;
+    color: #7db8ff;
+    position: absolute;
+    left: -0.3em;
+    top: -0.2em;
 }
 
 /* Main Content Container */
@@ -1087,6 +1108,132 @@ a:hover {
     background-color: var(--color-gray);
 }
 
+/* Team & Collaborators */
+.team-section {
+    margin-top: 1.5em;
+    padding-top: 1.5em;
+    border-top: 1px dashed var(--border-color);
+}
+
+.team-section h5 {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.team-member {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    background-color: var(--bg-secondary);
+    padding: 0.8em 1.2em;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: 2px solid transparent;
+}
+
+.team-member:hover {
+    background-color: var(--color-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(44, 82, 130, 0.3);
+    border-color: var(--color-blue);
+}
+
+.team-member:hover .team-name,
+.team-member:hover .team-role {
+    color: #ffffff;
+}
+
+.team-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.team-member:hover .team-avatar {
+    border-color: #ffffff;
+}
+
+.team-avatar-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-blue), var(--color-purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1em;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.team-member:hover .team-avatar-placeholder {
+    border-color: #ffffff;
+    background: linear-gradient(135deg, #ffffff, #e0e0e0);
+    color: var(--color-blue);
+}
+
+.team-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.team-name {
+    font-weight: 600;
+    font-size: 0.95em;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.team-role {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+.team-linkedin-icon {
+    margin-left: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 1.1em;
+}
+
+.team-member:hover .team-linkedin-icon {
+    opacity: 1;
+}
+
+/* Team Mobile */
+@media (max-width: 968px) {
+    .team-grid {
+        flex-direction: column;
+    }
+
+    .team-member {
+        width: 100%;
+    }
+
+    .team-linkedin-icon {
+        opacity: 1;
+    }
+}
+
 /* Timeline Mobile */
 @media (max-width: 968px) {
     .timeline {
@@ -1191,7 +1338,7 @@ section::-webkit-scrollbar-thumb:hover { background: #a0a0a0; }
         z-index: 99;
     }
 
-    .sidebar h1 { font-size: 1.4em; margin-bottom: 0.3em; }
+    .sidebar h1 { font-size: 1.4em; margin-bottom: 0em; }
     .sidebar .subtitle { margin-bottom: 0; font-size: 0.85em; }
 
     .sidebar nav ul {
@@ -1200,7 +1347,7 @@ section::-webkit-scrollbar-thumb:hover { background: #a0a0a0; }
         flex-direction: column;
         background-color: #4a4a4a;
         position: fixed;
-        top: 80px;
+        top: 106px;
         left: 0;
         right: 0;
         padding: 0;
@@ -1209,6 +1356,9 @@ section::-webkit-scrollbar-thumb:hover { background: #a0a0a0; }
         max-height: calc(100vh - 80px);
         overflow-y: auto;
         z-index: 1000;
+    }
+    .sidebar-quote {
+        margin-bottom: 0em;
     }
 
     .sidebar nav ul.show { display: flex; }
@@ -1274,7 +1424,7 @@ section::-webkit-scrollbar-thumb:hover { background: #a0a0a0; }
 @media (max-width: 480px) {
     .sidebar { padding: 12px 15px; }
     .sidebar h1 { font-size: 1.25em; }
-    .sidebar .subtitle { font-size: 0.8em; }
+    .sidebar .subtitle { font-size: 1.1em; }
     section { padding: 25px 15px; }
     h2 { font-size: 1.4em; }
     h3 { font-size: 1.1em; }
