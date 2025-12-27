@@ -2631,11 +2631,15 @@ h2 {
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         max-height: calc(100vh - 75px);
         overflow-y: auto;
-        z-index: 1000;
+        z-index: 9999;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
     }
 
     .sidebar nav ul.show {
-        display: flex;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     .sidebar nav li {
@@ -2747,7 +2751,8 @@ h2 {
 
     .sidebar nav ul {
         top: 47px;
-        max-height: calc(100vh - 65px);
+        max-height: calc(100vh - 47px);
+        z-index: 9999;
     }
 
     .section-container {
