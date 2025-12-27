@@ -2746,7 +2746,7 @@ h2 {
     }
 
     .sidebar nav ul {
-        top: 65px;
+        top: 47px;
         max-height: calc(100vh - 65px);
     }
 
