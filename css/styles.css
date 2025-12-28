@@ -2570,7 +2570,7 @@ h2 {
         top: 0;
         height: auto;
         padding: 1rem 1.5rem;
-        z-index: 99;
+        z-index: 9998;
     }
 
     .sidebar-header {
@@ -2624,22 +2624,19 @@ h2 {
         top: 75px;
         left: 0;
         right: 0;
-        background: linear-gradient(180deg, #0f0a1e 0%, #1e1b4b 100%);
+        bottom: 0;
+        background: #0f0a1e;
         padding: 1rem;
         margin: 0;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        max-height: calc(100vh - 75px);
         overflow-y: auto;
-        z-index: 9999;
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
+        z-index: 99999;
+        -webkit-overflow-scrolling: touch;
     }
 
     .sidebar nav ul.show {
         display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
     }
 
     .sidebar nav li {
@@ -2751,8 +2748,7 @@ h2 {
 
     .sidebar nav ul {
         top: 47px;
-        max-height: calc(100vh - 47px);
-        z-index: 9999;
+        z-index: 99999;
     }
 
     .section-container {
