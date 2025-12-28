@@ -37,8 +37,36 @@
         </svg>
     </button>
 
-    <!-- Theme & Language Controls -->
-    <div class="top-controls">
+    <!-- Mobile Top Bar -->
+    <div class="mobile-top-bar">
+        <button class="hamburger" id="hamburger-menu" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="top-controls">
+            <div class="theme-toggle" id="theme-toggle-mobile" title="Toggle dark mode">
+                <div class="theme-toggle-track">
+                    <span class="theme-icon sun">☀️</span>
+                    <span class="theme-icon moon">🌙</span>
+                </div>
+                <div class="theme-toggle-thumb"></div>
+            </div>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="en">
+                    <span class="lang-flag">🇬🇧</span>
+                    <span class="lang-text">EN</span>
+                </button>
+                <button class="lang-btn" data-lang="de">
+                    <span class="lang-flag">🇩🇪</span>
+                    <span class="lang-text">DE</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme & Language Controls (Desktop) -->
+    <div class="top-controls desktop-only">
         <div class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
             <div class="theme-toggle-track">
                 <span class="theme-icon sun">☀️</span>
@@ -61,7 +89,7 @@
     <!-- Left Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-header">
-            <h1>Brahim Baha Mlouk</h1>
+            <h1>Brahim Ait-Mlouk</h1>
             <p class="subtitle">
                 <span class="typing-text" data-en="AI Engineer" data-de="AI Engineer">AI Engineer</span>
             </p>
@@ -75,11 +103,6 @@
         </div>
         
         <nav>
-            <button class="hamburger" id="hamburger-menu" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
             <ul id="mobile-nav">
                 <li>
                     <a href="#" data-section="home" class="nav-link active">
@@ -308,13 +331,17 @@
                     <!-- Master's -->
                     <div class="edu-card">
                         <div class="edu-year-badge">2020 - 2022</div>
+                        <div class="edu-logo">
+                            <img src="images/Logo_fssm.jpg" alt="Faculty of Sciences Semlalia Marrakech Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                            <div class="edu-logo-fallback">🎓</div>
+                        </div>
                         <div class="edu-content">
                             <div class="edu-type master">
                                 <span>🎓</span>
                                 <span data-en="Master's Degree" data-de="Master-Abschluss">Master's Degree</span>
                             </div>
                             <h4 data-en="Information Systems Engineering" data-de="Informationssystem-Engineering">Information Systems Engineering</h4>
-                            <p class="edu-institution" data-en="Faculty of Sciences Semlalia" data-de="Fakultät der Wissenschaften Semlalia">Faculty of Sciences Semlalia</p>
+                            <p class="edu-institution" data-en="Faculty of Sciences Semlalia - Cadi Ayyad University" data-de="Fakultät der Wissenschaften Semlalia - Cadi Ayyad Universität">Faculty of Sciences Semlalia - Cadi Ayyad University</p>
                             <p class="edu-location">📍 <span data-en="Marrakech, Morocco" data-de="Marrakesch, Marokko">Marrakech, Morocco</span></p>
                             <div class="edu-highlight">
                                 <span>🇩🇪</span>
@@ -326,13 +353,17 @@
                     <!-- Bachelor's -->
                     <div class="edu-card">
                         <div class="edu-year-badge">2016 - 2020</div>
+                        <div class="edu-logo">
+                            <img src="images/logo_fst.png" alt="FST Errachidia Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                            <div class="edu-logo-fallback">🎓</div>
+                        </div>
                         <div class="edu-content">
                             <div class="edu-type bachelor">
                                 <span>🎓</span>
                                 <span data-en="Bachelor's Degree" data-de="Bachelor-Abschluss">Bachelor's Degree</span>
                             </div>
                             <h4 data-en="Software Engineering" data-de="Software-Engineering">Software Engineering</h4>
-                            <p class="edu-institution" data-en="Faculty of Sciences and Techniques" data-de="Fakultät der Wissenschaften und Techniken">Faculty of Sciences and Techniques</p>
+                            <p class="edu-institution" data-en="Faculty of Sciences and Techniques - Moulay Ismail University" data-de="Fakultät der Wissenschaften und Techniken - Moulay Ismail Universität">Faculty of Sciences and Techniques - Moulay Ismail University</p>
                             <p class="edu-location">📍 Errachidia, <span data-en="Morocco" data-de="Marokko">Morocco</span></p>
                         </div>
                     </div>
@@ -340,6 +371,9 @@
                     <!-- Baccalaureate -->
                     <div class="edu-card">
                         <div class="edu-year-badge">2016</div>
+                        <div class="edu-logo">
+                            <div class="edu-logo-fallback" style="display:flex">📜</div>
+                        </div>
                         <div class="edu-content">
                             <div class="edu-type bac">
                                 <span>📜</span>
@@ -666,104 +700,480 @@
                     <p class="section-subtitle" data-en-html="AI engineering projects demonstrating practical applications" data-de-html="AI-Engineering-Projekte mit praktischen Anwendungen">AI engineering projects demonstrating practical applications</p>
                 </div>
 
-                <div class="projects-grid fade-in fade-in-delay-1">
-                    <!-- Project 1 -->
-                    <div class="project-card">
-                        <div class="project-status-badge done" data-en="Completed" data-de="Fertig">Completed</div>
-                        <div class="project-icon">🤖</div>
-                        <h4 data-en="AI Decision Assistant (RAG)" data-de="AI Decision Assistant (RAG)">AI Decision Assistant (RAG)</h4>
-                        <p data-en="Enterprise-style AI assistant that answers questions strictly based on provided documents, reducing hallucinations." data-de="Unternehmensgerechter AI-Assistent, der Fragen auf Basis bereitgestellter Dokumente beantwortet.">Enterprise-style AI assistant that answers questions strictly based on provided documents, reducing hallucinations.</p>
-                        <div class="project-tech">
-                            <span>Python</span>
-                            <span>FastAPI</span>
-                            <span>FAISS</span>
-                            <span>Embeddings</span>
-                        </div>
-                        <div class="project-collaborators">
-                            <span class="collab-label" data-en="Team" data-de="Team">Team</span>
-                            <div class="collab-avatars">
-                                <span class="collab-avatar solo" title="Solo Project">👤</span>
+                <!-- Projects Overview -->
+                <div class="projects-overview fade-in fade-in-delay-1">
+                    <div class="overview-card">
+                        <div class="overview-icon">💡</div>
+                        <div class="overview-content">
+                            <h4 data-en="About These Projects" data-de="Über diese Projekte">About These Projects</h4>
+                            <p data-en="This portfolio showcases 25 AI projects organized by complexity. From beginner-friendly Applied AI tools to advanced Agent-based systems, each project demonstrates real-world problem-solving with LLMs, RAG pipelines, and Python backends. Projects range from simple data extraction to multi-step autonomous agents." data-de="Dieses Portfolio zeigt 25 AI-Projekte, organisiert nach Komplexität. Von einsteigerfreundlichen Applied-AI-Tools bis hin zu fortgeschrittenen Agenten-Systemen demonstriert jedes Projekt praxisnahe Problemlösung mit LLMs, RAG-Pipelines und Python-Backends.">This portfolio showcases 25 AI projects organized by complexity. From beginner-friendly Applied AI tools to advanced Agent-based systems, each project demonstrates real-world problem-solving with LLMs, RAG pipelines, and Python backends. Projects range from simple data extraction to multi-step autonomous agents.</p>
+                            <div class="overview-categories">
+                                <span class="cat-tag beginner"><span>🟢</span> <span data-en="Applied AI" data-de="Angewandte AI">Applied AI</span> <small data-en="(Beginner)" data-de="(Einsteiger)">(Beginner)</small></span>
+                                <span class="cat-tag intermediate"><span>🟡</span> <span data-en="RAG Systems" data-de="RAG-Systeme">RAG Systems</span> <small data-en="(Intermediate)" data-de="(Mittel)">(Intermediate)</small></span>
+                                <span class="cat-tag intermediate"><span>🟠</span> <span data-en="Workflows" data-de="Workflows">Workflows</span> <small data-en="(Intermediate)" data-de="(Mittel)">(Intermediate)</small></span>
+                                <span class="cat-tag advanced"><span>🔴</span> <span data-en="Agents" data-de="Agenten">Agents</span> <small data-en="(Advanced)" data-de="(Fortgeschritten)">(Advanced)</small></span>
+                                <span class="cat-tag tools"><span>🔧</span> <span data-en="Dev Tools" data-de="Dev-Tools">Dev Tools</span></span>
                             </div>
-                            <span class="collab-text" data-en="Solo Project" data-de="Einzelprojekt">Solo Project</span>
                         </div>
-                        <a href="https://github.com/yourusername/rag-assistant" target="_blank" class="project-link">
-                            View on GitHub →
-                        </a>
                     </div>
+                </div>
 
-                    <!-- Project 2 -->
-                    <div class="project-card">
-                        <div class="project-status-badge in-progress" data-en="In Progress" data-de="In Bearbeitung">In Progress</div>
-                        <div class="project-icon">💰</div>
-                        <h4 data-en="AI Expense Analysis Assistant" data-de="AI Expense Analysis Assistant">AI Expense Analysis Assistant</h4>
-                        <p data-en="Backend-driven AI that converts natural-language expense entries into validated structured data." data-de="Backend-gesteuerter AI-Assistent für natürlichsprachliche Ausgabeneinträge.">Backend-driven AI that converts natural-language expense entries into validated structured data.</p>
-                        <div class="project-tech">
-                            <span>Python</span>
-                            <span>FastAPI</span>
-                            <span>SQL</span>
-                            <span>LLM API</span>
-                        </div>
-                        <div class="project-collaborators">
-                            <span class="collab-label" data-en="Team" data-de="Team">Team</span>
-                            <div class="collab-avatars">
-                                <span class="collab-avatar solo" title="Solo Project">👤</span>
+                <!-- Category: Applied AI (Beginners) -->
+                <div class="project-category fade-in fade-in-delay-1">
+                    <h3 class="category-title"><span class="category-icon">🟢</span> Applied AI <span class="category-badge">BEST for beginners</span></h3>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-status-badge in-progress">In Progress</div>
+                            <div class="project-icon">💰</div>
+                            <h4>AI Expense Analysis Assistant</h4>
+                            <p>Turns natural-language expenses into structured, validated financial data.</p>
+                            <div class="project-tech"><span>Python</span><span>FastAPI</span><span>LLM API</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
                             </div>
-                            <span class="collab-text" data-en="Solo Project" data-de="Einzelprojekt">Solo Project</span>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 65%"></div></div>
+                                <span>65%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/expense-assistant" target="_blank" class="project-link">View on GitHub →</a>
                         </div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 65%"></div></div>
-                            <span>65%</span>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">🧾</div>
+                            <h4>AI Invoice / Receipt Parser</h4>
+                            <p>Extracts key fields (amount, date, vendor) from text or OCR output.</p>
+                            <div class="project-tech"><span>Python</span><span>OCR</span><span>LLM API</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/invoice-parser" target="_blank" class="project-link">View on GitHub →</a>
                         </div>
-                        <a href="https://github.com/yourusername/expense-assistant" target="_blank" class="project-link">
-                            View on GitHub →
-                        </a>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">📝</div>
+                            <h4>AI Form-to-JSON Converter</h4>
+                            <p>Converts free-text user input into clean JSON following a strict schema.</p>
+                            <div class="project-tech"><span>Python</span><span>JSON Schema</span><span>LLM</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/form-to-json" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">📄</div>
+                            <h4>AI Resume Analyzer</h4>
+                            <p>Analyzes CV text and highlights skills, gaps, and role fit.</p>
+                            <div class="project-tech"><span>Python</span><span>NLP</span><span>LLM API</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/resume-analyzer" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">💬</div>
+                            <h4>AI Customer Support Auto-Responder</h4>
+                            <p>Generates consistent replies based on predefined support rules.</p>
+                            <div class="project-tech"><span>Python</span><span>FastAPI</span><span>LLM</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/support-responder" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
                     </div>
+                </div>
 
-                    <!-- Project 3 -->
-                    <div class="project-card">
-                        <div class="project-status-badge done" data-en="Completed" data-de="Fertig">Completed</div>
-                        <div class="project-icon">📊</div>
-                        <h4 data-en="LLM Evaluation Framework" data-de="LLM-Evaluierungs-Framework">LLM Evaluation Framework</h4>
-                        <p data-en="Backend tool to evaluate consistency, accuracy, and reliability of LLM responses across multiple prompts." data-de="Backend-Tool zur Bewertung der Konsistenz und Zuverlässigkeit von LLM-Antworten.">Backend tool to evaluate consistency, accuracy, and reliability of LLM responses across multiple prompts.</p>
-                        <div class="project-tech">
-                            <span>Python</span>
-                            <span>FastAPI</span>
-                            <span>PostgreSQL</span>
-                        </div>
-                        <div class="project-collaborators">
-                            <span class="collab-label" data-en="Team" data-de="Team">Team</span>
-                            <div class="collab-avatars">
-                                <span class="collab-avatar" title="Baha">BB</span>
-                                <span class="collab-avatar" title="Collaborator">+1</span>
+                <!-- Category: RAG / Knowledge-Based AI -->
+                <div class="project-category fade-in fade-in-delay-1">
+                    <h3 class="category-title"><span class="category-icon">🟡</span> RAG / Knowledge-Based AI</h3>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-status-badge done">Completed</div>
+                            <div class="project-icon">📚</div>
+                            <h4>Document Q&A Assistant (RAG)</h4>
+                            <p>Answers questions strictly from uploaded documents.</p>
+                            <div class="project-tech"><span>Python</span><span>FAISS</span><span>Embeddings</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
                             </div>
-                            <span class="collab-text" data-en="2 Contributors" data-de="2 Mitwirkende">2 Contributors</span>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+                                <span>100%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/document-qa-rag" target="_blank" class="project-link">View on GitHub →</a>
                         </div>
-                        <a href="https://github.com/yourusername/llm-evaluation" target="_blank" class="project-link">
-                            View on GitHub →
-                        </a>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">🏢</div>
+                            <h4>Company Policy Assistant</h4>
+                            <p>Employees ask questions about internal rules and policies.</p>
+                            <div class="project-tech"><span>RAG</span><span>FastAPI</span><span>Chroma</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/policy-assistant" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">⚖️</div>
+                            <h4>Legal / Contract Clause Finder</h4>
+                            <p>Finds and explains clauses from contracts.</p>
+                            <div class="project-tech"><span>RAG</span><span>NLP</span><span>LLM API</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/contract-clause-finder" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">📖</div>
+                            <h4>Study Notes AI Tutor</h4>
+                            <p>Answers exam questions using lecture notes only.</p>
+                            <div class="project-tech"><span>RAG</span><span>Embeddings</span><span>FAISS</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/study-tutor" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">📦</div>
+                            <h4>Product Knowledge Chatbot</h4>
+                            <p>Explains product features from manuals and FAQs.</p>
+                            <div class="project-tech"><span>RAG</span><span>FastAPI</span><span>LLM</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/product-chatbot" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
                     </div>
+                </div>
 
-                    <!-- Project 4 -->
-                    <div class="project-card">
-                        <div class="project-status-badge todo" data-en="Planned" data-de="Geplant">Planned</div>
-                        <div class="project-icon">🔧</div>
-                        <h4 data-en="AI-Assisted Backend Ops Tool" data-de="AI-Assisted Backend Ops Tool">AI-Assisted Backend Ops Tool</h4>
-                        <p data-en="Internal backend assistant providing AI-generated suggestions for logs, errors, and code maintenance." data-de="Interner Backend-Assistent mit AI-generierten Vorschlägen für Logs und Fehler.">Internal backend assistant providing AI-generated suggestions for logs, errors, and code maintenance.</p>
-                        <div class="project-tech">
-                            <span>Python</span>
-                            <span>FastAPI</span>
-                            <span>LLM API</span>
-                        </div>
-                        <div class="project-collaborators">
-                            <span class="collab-label" data-en="Team" data-de="Team">Team</span>
-                            <div class="collab-avatars">
-                                <span class="collab-avatar looking" title="Looking for collaborators">👥</span>
+                <!-- Category: Developer-Focused AI -->
+                <div class="project-category fade-in fade-in-delay-1">
+                    <h3 class="category-title"><span class="category-icon">🟡</span> Developer-Focused AI</h3>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">🚫</div>
+                            <h4>AI Error Log Explainer</h4>
+                            <p>Explains backend errors and suggests fixes.</p>
+                            <div class="project-tech"><span>Python</span><span>LLM API</span><span>Logging</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
                             </div>
-                            <span class="collab-text looking" data-en="Looking for collaborators" data-de="Suche Mitarbeiter">Looking for collaborators</span>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/error-log-explainer" target="_blank" class="project-link">View on GitHub →</a>
                         </div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 5%"></div></div>
-                            <span>5%</span>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">🔍</div>
+                            <h4>AI Code Review Assistant</h4>
+                            <p>Reviews code and flags readability or security issues.</p>
+                            <div class="project-tech"><span>Python</span><span>AST</span><span>LLM</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/code-review-assistant" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">📑</div>
+                            <h4>AI API Documentation Generator</h4>
+                            <p>Generates API docs from function signatures and comments.</p>
+                            <div class="project-tech"><span>Python</span><span>OpenAPI</span><span>LLM</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/api-doc-generator" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">🧪</div>
+                            <h4>AI Test Case Generator</h4>
+                            <p>Creates unit test cases from code logic.</p>
+                            <div class="project-tech"><span>Python</span><span>Pytest</span><span>LLM</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/test-case-generator" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">📝</div>
+                            <h4>AI Commit Message Generator</h4>
+                            <p>Creates clear Git commit messages from code changes.</p>
+                            <div class="project-tech"><span>Python</span><span>Git</span><span>LLM API</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/commit-message-generator" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category: Business / Productivity AI -->
+                <div class="project-category fade-in fade-in-delay-1">
+                    <h3 class="category-title"><span class="category-icon">🟢</span> Business / Productivity AI</h3>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">📋</div>
+                            <h4>AI Meeting Notes Summarizer</h4>
+                            <p>Summarizes long meeting transcripts into action items.</p>
+                            <div class="project-tech"><span>Python</span><span>NLP</span><span>LLM API</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/meeting-summarizer" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">📧</div>
+                            <h4>AI Email Classifier</h4>
+                            <p>Automatically labels and prioritizes emails.</p>
+                            <div class="project-tech"><span>Python</span><span>NLP</span><span>Classification</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/email-classifier" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">🎯</div>
+                            <h4>AI Sales Lead Qualifier</h4>
+                            <p>Scores leads based on message content.</p>
+                            <div class="project-tech"><span>Python</span><span>LLM</span><span>Scoring</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/lead-qualifier" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">💼</div>
+                            <h4>AI Job Description Generator</h4>
+                            <p>Creates job postings from role requirements.</p>
+                            <div class="project-tech"><span>Python</span><span>LLM API</span><span>Templates</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/job-description-generator" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">🛡️</div>
+                            <h4>AI Content Moderation Tool</h4>
+                            <p>Flags toxic or unsafe content.</p>
+                            <div class="project-tech"><span>Python</span><span>NLP</span><span>Classification</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/content-moderation" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category: Advanced -->
+                <div class="project-category fade-in fade-in-delay-1">
+                    <h3 class="category-title"><span class="category-icon">🟠</span> Advanced Projects</h3>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">📂</div>
+                            <h4>Multi-Document RAG Assistant</h4>
+                            <p>Searches across multiple sources and compares answers.</p>
+                            <div class="project-tech"><span>RAG</span><span>FAISS</span><span>Multi-index</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/multi-doc-rag" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">📝</div>
+                            <h4>AI Prompt Management Tool</h4>
+                            <p>Stores, versions, and tests prompts.</p>
+                            <div class="project-tech"><span>Python</span><span>PostgreSQL</span><span>FastAPI</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/prompt-manager" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">🧠</div>
+                            <h4>AI Chat Memory Service</h4>
+                            <p>Adds conversation memory to AI apps.</p>
+                            <div class="project-tech"><span>Python</span><span>Redis</span><span>LLM</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/chat-memory-service" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">⚙️</div>
+                            <h4>AI Workflow Automation Engine</h4>
+                            <p>Chains multiple AI tasks together.</p>
+                            <div class="project-tech"><span>Python</span><span>Celery</span><span>LLM</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/workflow-automation" target="_blank" class="project-link">View on GitHub →</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-status-badge todo">Planned</div>
+                            <div class="project-icon">📊</div>
+                            <h4>AI Feedback Analyzer</h4>
+                            <p>Aggregates and analyzes user feedback with AI.</p>
+                            <div class="project-tech"><span>Python</span><span>NLP</span><span>Analytics</span></div>
+                            <div class="project-collaborators">
+                                <span class="collab-label">Team</span>
+                                <div class="collab-avatars"><span class="collab-avatar solo">👤</span></div>
+                                <span class="collab-text">Solo Project</span>
+                            </div>
+                            <div class="project-progress">
+                                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                                <span>0%</span>
+                            </div>
+                            <a href="https://github.com/yourusername/feedback-analyzer" target="_blank" class="project-link">View on GitHub →</a>
                         </div>
                     </div>
                 </div>

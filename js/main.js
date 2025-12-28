@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Dark Mode Toggle
     const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     
     const savedTheme = localStorage.getItem('theme');
@@ -21,13 +22,20 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.setAttribute('data-theme', 'dark');
     }
     
-    themeToggle.addEventListener('click', function() {
+    function toggleTheme() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
-    });
+    }
+    
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+    if (themeToggleMobile) {
+        themeToggleMobile.addEventListener('click', toggleTheme);
+    }
 
     // Navigation functionality
     const navLinks = document.querySelectorAll('.nav-link');
