@@ -34,41 +34,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('.content-section');
 
     function closeMobileMenu() {
-        const menu = document.getElementById('mobile-nav');
+        const sidebar = document.querySelector('.sidebar');
         const hamburger = document.getElementById('hamburger-menu');
         
-        if (menu) menu.classList.remove('show');
+        if (sidebar) sidebar.classList.remove('show');
         if (hamburger) hamburger.classList.remove('active');
     }
 
     // Mobile menu toggle
     const hamburger = document.getElementById('hamburger-menu');
-    const mobileMenu = document.getElementById('mobile-nav');
+    const sidebar = document.querySelector('.sidebar');
     
-    if (hamburger && mobileMenu) {
-        // Handle both click and touch events
-        hamburger.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            mobileMenu.classList.toggle('show');
+    if (hamburger && sidebar) {
+        hamburger.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
             this.classList.toggle('active');
         });
         
-        // Touch event for better mobile support
-        hamburger.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            mobileMenu.classList.toggle('show');
-            this.classList.toggle('active');
-        }, { passive: false });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.remove('show');
-                hamburger.classList.remove('active');
+        // Close sidebar when clicking on overlay
+        sidebar.addEventListener('click', function(e) {
+            if (e.target === sidebar || e.target.classList.contains('sidebar')) {
+                // Only close if clicking the overlay area (::after pseudo-element area)
+                const sidebarRect = sidebar.getBoundingClientRect();
+                if (e.clientX > sidebarRect.width) {
+                    sidebar.classList.remove('show');
+                    hamburger.classList.remove('active');
+                }
             }
         });
     }
