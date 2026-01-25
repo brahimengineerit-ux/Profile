@@ -3095,3 +3095,111 @@ h2 {
         padding: 0.35rem 0.6rem;
     }
 }
+
+/* Filter Buttons */
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.filter-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.filter-btn.active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+}
+
+.filter-btn.easy:hover,
+.filter-btn.easy.active {
+    background: #22c55e;
+    border-color: #22c55e;
+    color: white;
+}
+
+.filter-btn.medium:hover,
+.filter-btn.medium.active {
+    background: #eab308;
+    border-color: #eab308;
+    color: white;
+}
+
+.filter-btn.advanced:hover,
+.filter-btn.advanced.active {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: white;
+}
+
+/* Projects Grid Filtered */
+.projects-grid-filtered {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.project-card[data-level] {
+    transition: all 0.4s ease;
+}
+
+.project-card.hidden {
+    display: none;
+}
+
+.project-card .level-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.project-card .level-badge.easy {
+    background: #22c55e20;
+    color: #22c55e;
+}
+
+.project-card .level-badge.medium {
+    background: #eab30820;
+    color: #eab308;
+}
+
+.project-card .level-badge.advanced {
+    background: #ef444420;
+    color: #ef4444;
+}
+
+@media (max-width: 768px) {
+    .filter-buttons {
+        gap: 0.5rem;
+    }
+    
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .projects-grid-filtered {
+        grid-template-columns: 1fr;
+    }
+}

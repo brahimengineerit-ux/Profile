@@ -248,3 +248,30 @@ function toggleCollapse(header) {
     const content = header.nextElementSibling;
     content.classList.toggle('active');
 }
+
+// Project Filter Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card[data-level]');
+    
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active from all buttons
+            filterButtons.forEach(b => b.classList.remove('active'));
+            // Add active to clicked button
+            this.classList.add('active');
+            
+            const filter = this.getAttribute('data-filter');
+            
+            projectCards.forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = '';
+                } else if (card.getAttribute('data-level') === filter) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
