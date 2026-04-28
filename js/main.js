@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Keyboard Navigation
-    const sectionOrder = ['home', 'education', 'experience', 'projects', 'contact'];
+    const sectionOrder = ['home', 'services', 'education', 'experience', 'projects', 'contact'];
     
     document.addEventListener('keydown', function(e) {
         const activeLink = document.querySelector('.nav-link.active');
