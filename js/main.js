@@ -1,277 +1,405 @@
-// Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Hide loading screen after page loads
-    const loadingScreen = document.getElementById('loading-screen');
-    
-    setTimeout(function() {
-        loadingScreen.classList.add('hidden');
-        setTimeout(function() {
-            loadingScreen.style.display = 'none';
-        }, 500);
-    }, 1000);
+/* ========================================================
+   Brahim Ait-Mlouk · Portfolio v4.3
+   Vanilla JS — routing, theme, lang, motion, project search.
+======================================================== */
 
-    // Dark Mode Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        document.documentElement.setAttribute('data-theme', savedTheme);
-    } else if (prefersDark.matches) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    }
-    
-    function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-    }
-    
-    if (themeToggle) {
-        themeToggle.addEventListener('click', toggleTheme);
-    }
-    if (themeToggleMobile) {
-        themeToggleMobile.addEventListener('click', toggleTheme);
-    }
+(function () {
+    'use strict';
 
-    // Navigation functionality
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.content-section');
+    const $  = (sel, ctx = document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-    function closeMobileMenu() {
-        const sidebar = document.querySelector('.sidebar');
-        const hamburger = document.getElementById('hamburger-menu');
-        
-        if (sidebar) sidebar.classList.remove('show');
-        if (hamburger) hamburger.classList.remove('active');
-    }
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Mobile menu toggle
-    const hamburger = document.getElementById('hamburger-menu');
-    const sidebar = document.querySelector('.sidebar');
-    
-    if (hamburger && sidebar) {
-        hamburger.addEventListener('click', function() {
-            sidebar.classList.toggle('show');
-            this.classList.toggle('active');
-        });
-        
-        // Close sidebar when clicking on overlay
-        sidebar.addEventListener('click', function(e) {
-            if (e.target === sidebar || e.target.classList.contains('sidebar')) {
-                // Only close if clicking the overlay area (::after pseudo-element area)
-                const sidebarRect = sidebar.getBoundingClientRect();
-                if (e.clientX > sidebarRect.width) {
-                    sidebar.classList.remove('show');
-                    hamburger.classList.remove('active');
-                }
-            }
-        });
-    }
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetSection = this.getAttribute('data-section');
-            
-            navLinks.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-            
-            sections.forEach(section => {
-                if (section.id === targetSection) {
-                    section.classList.add('active');
-                    section.classList.remove('exit-left');
-                } else if (section.classList.contains('active')) {
-                    section.classList.remove('active');
-                    section.classList.add('exit-left');
-                }
-            });
-
-            closeMobileMenu();
-        });
-    });
-
-    // Language switcher
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const lang = this.getAttribute('data-lang');
-            
-            document.querySelectorAll('.lang-btn').forEach(b => {
-                b.classList.remove('active');
-            });
-            this.classList.add('active');
-
-            // Set data-lang attribute on html element for CSS-based switching
-            document.documentElement.setAttribute('data-lang', lang);
-
-            const translatableElements = document.querySelectorAll('[data-en]');
-            
-            translatableElements.forEach(element => {
-                if (lang === 'en') {
-                    element.textContent = element.getAttribute('data-en');
-                } else if (lang === 'de') {
-                    element.textContent = element.getAttribute('data-de');
-                }
-            });
-
-            const htmlElements = document.querySelectorAll('[data-en-html]');
-            htmlElements.forEach(element => {
-                if (lang === 'en') {
-                    element.innerHTML = element.getAttribute('data-en-html');
-                } else if (lang === 'de') {
-                    element.innerHTML = element.getAttribute('data-de-html');
-                }
-            });
-            
-            // Save language preference
-            localStorage.setItem('lang', lang);
-            
-            console.log('Switched to:', lang);
-        });
-    });
-
-    // Load saved language preference
-    const savedLang = localStorage.getItem('lang') || 'en';
-    document.documentElement.setAttribute('data-lang', savedLang);
-    const langBtn = document.querySelector(`.lang-btn[data-lang="${savedLang}"]`);
-    if (langBtn && savedLang !== 'en') {
-        langBtn.click();
-    }
-
-    // Back to Top Button
-    const backToTopBtn = document.getElementById('back-to-top');
-    
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.addEventListener('scroll', function() {
-            if (this.classList.contains('active')) {
-                if (this.scrollTop > 300) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
-                }
-            }
-        });
-    });
-
-    backToTopBtn.addEventListener('click', function() {
-        const activeSection = document.querySelector('.content-section.active');
-        if (activeSection) {
-            activeSection.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+    /* -----------------------------------------------------
+       1. Theme
+    ----------------------------------------------------- */
+    const root = document.documentElement;
+    const themeBtn = $('#theme-toggle');
+    const initTheme = () => {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'dark' || saved === 'light') {
+            root.setAttribute('data-theme', saved);
         }
-    });
-
-    // Keyboard Navigation
-    const sectionOrder = ['home', 'services', 'education', 'experience', 'projects', 'contact'];
-    
-    document.addEventListener('keydown', function(e) {
-        const activeLink = document.querySelector('.nav-link.active');
-        const currentSection = activeLink ? activeLink.getAttribute('data-section') : 'home';
-        const currentIndex = sectionOrder.indexOf(currentSection);
-        
-        let newIndex = currentIndex;
-        
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-            e.preventDefault();
-            newIndex = (currentIndex + 1) % sectionOrder.length;
-        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-            e.preventDefault();
-            newIndex = (currentIndex - 1 + sectionOrder.length) % sectionOrder.length;
-        } else if (e.key === 'Escape') {
-            closeMobileMenu();
-            return;
-        } else {
-            return;
-        }
-        
-        const newSection = sectionOrder[newIndex];
-        const newLink = document.querySelector(`.nav-link[data-section="${newSection}"]`);
-        if (newLink) {
-            newLink.click();
-        }
-    });
-
-    // Animate elements on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
     };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-            }
-        });
-    }, observerOptions);
+    const applyTheme = () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+    };
 
-    document.querySelectorAll('.fade-in').forEach(el => {
-        observer.observe(el);
+    const toggleTheme = () => {
+        if (document.startViewTransition && !reduceMotion) {
+            document.startViewTransition(applyTheme);
+        } else {
+            applyTheme();
+        }
+    };
+
+    initTheme();
+    themeBtn?.addEventListener('click', toggleTheme);
+
+    /* -----------------------------------------------------
+       2. Language
+    ----------------------------------------------------- */
+    const setLang = (lang) => {
+        root.setAttribute('data-lang', lang);
+        localStorage.setItem('lang', lang);
+
+        $$('[data-en]').forEach(el => {
+            const val = el.getAttribute('data-' + lang);
+            if (val !== null) el.textContent = val;
+        });
+
+        $$('[data-en-html]').forEach(el => {
+            const val = el.getAttribute('data-' + lang + '-html');
+            if (val !== null) el.innerHTML = val;
+        });
+
+        $$('.lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
+    };
+
+    // Translate the search input placeholder
+    const updateSearchPlaceholder = (lang) => {
+        const input = $('#project-search');
+        if (!input) return;
+        const ph = input.getAttribute('data-' + lang + '-placeholder');
+        if (ph) input.setAttribute('placeholder', ph);
+    };
+
+    $$('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setLang(btn.dataset.lang);
+            updateSearchPlaceholder(btn.dataset.lang);
+            // Re-index search rows since their text content just changed
+            rowIndex = indexRows();
+            applySearch();
+        });
     });
 
-    // Animate language bars on Home section load
-    function animateLanguageBars() {
-        const languageFills = document.querySelectorAll('.language-fill');
-        languageFills.forEach(fill => {
-            const width = fill.style.width;
-            fill.style.width = '0';
-            setTimeout(() => {
-                fill.style.width = width;
-            }, 300);
+    const initialLang = localStorage.getItem('lang') || 'en';
+    setLang(initialLang);
+    updateSearchPlaceholder(initialLang);
+
+    /* -----------------------------------------------------
+       3. Section routing
+    ----------------------------------------------------- */
+    const navLinks = $$('.nav-link, .brand[data-section]');
+    const sections = $$('.section');
+    const order = ['home', 'services', 'experience', 'projects', 'education', 'contact'];
+
+    const goTo = (id) => {
+        sections.forEach(s => s.classList.toggle('active', s.id === id));
+        $$('.nav-link').forEach(l => {
+            l.classList.toggle('active', l.dataset.section === id);
         });
+        window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+        closeSidebar();
+        history.replaceState(null, '', '#' + id);
+
+        armReveals();
+        if (id === 'experience') animateCounters();
+    };
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = link.dataset.section;
+            if (target) goTo(target);
+        });
+    });
+
+    const initialHash = window.location.hash.replace('#', '');
+    if (order.includes(initialHash)) goTo(initialHash);
+
+    /* -----------------------------------------------------
+       4. Mobile sidebar
+    ----------------------------------------------------- */
+    const sidebar = $('#sidebar');
+    const menuBtn = $('#menu-toggle');
+    let backdrop = null;
+
+    const ensureBackdrop = () => {
+        if (backdrop) return backdrop;
+        backdrop = document.createElement('div');
+        backdrop.className = 'sidebar-backdrop';
+        backdrop.addEventListener('click', closeSidebar);
+        document.body.appendChild(backdrop);
+        return backdrop;
+    };
+
+    const openSidebar = () => {
+        sidebar?.classList.add('open');
+        ensureBackdrop().classList.add('visible');
+    };
+
+    function closeSidebar() {
+        sidebar?.classList.remove('open');
+        backdrop?.classList.remove('visible');
     }
 
-    // Call on initial load
-    setTimeout(animateLanguageBars, 1200);
-
-    // Smooth hover effect for cards
-    document.querySelectorAll('.bento-card, .project-card, .exp-card, .edu-card, .interest-card').forEach(card => {
-        card.addEventListener('mouseenter', function(e) {
-            this.style.transform = 'translateY(-4px)';
-        });
-        
-        card.addEventListener('mouseleave', function(e) {
-            this.style.transform = '';
-        });
+    menuBtn?.addEventListener('click', () => {
+        sidebar?.classList.contains('open') ? closeSidebar() : openSidebar();
     });
-});
 
-// Collapsible functionality (if needed)
-function toggleCollapse(header) {
-    header.classList.toggle('active');
-    const content = header.nextElementSibling;
-    content.classList.toggle('active');
-}
+    // Defensive fallback: delegated click on document, in case the button
+    // is ever re-rendered or covered by another element.
+    document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('#menu-toggle, .topbar-menu');
+        if (!trigger) return;
+        e.preventDefault();
+        sidebar?.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
 
-// Project Filter Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card[data-level]');
-    
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Remove active from all buttons
-            filterButtons.forEach(b => b.classList.remove('active'));
-            // Add active to clicked button
-            this.classList.add('active');
-            
-            const filter = this.getAttribute('data-filter');
-            
-            projectCards.forEach(card => {
-                if (filter === 'all') {
-                    card.style.display = '';
-                } else if (card.getAttribute('data-level') === filter) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
+    /* -----------------------------------------------------
+       5. Project search (filters editorial list)
+    ----------------------------------------------------- */
+    const searchInput = $('#project-search');
+    const plistBody   = $('#plist-body');
+    const plistEmpty  = $('#plist-empty');
+
+    // Pre-index searchable text on each row so we don't reflow on every keystroke
+    const indexRows = () => {
+        if (!plistBody) return [];
+        return $$('.prow', plistBody).map(row => {
+            const title = $('.prow-title', row)?.textContent || '';
+            const desc  = $('.prow-desc',  row)?.textContent || '';
+            const stack = $('.prow-stack', row)?.textContent || '';
+            return {
+                el: row,
+                haystack: (title + ' ' + desc + ' ' + stack).toLowerCase()
+            };
+        });
+    };
+
+    let rowIndex = indexRows();
+
+    const applySearch = () => {
+        if (!searchInput || !plistBody) return;
+        const q = searchInput.value.trim().toLowerCase();
+        let visible = 0;
+
+        rowIndex.forEach(({ el, haystack }) => {
+            const match = !q || haystack.includes(q);
+            el.classList.toggle('hidden', !match);
+            if (match) visible++;
+        });
+
+        if (plistEmpty) plistEmpty.hidden = visible !== 0;
+    };
+
+    searchInput?.addEventListener('input', applySearch);
+
+    /* -----------------------------------------------------
+       6. Back to top
+    ----------------------------------------------------- */
+    const toTop = $('#to-top');
+
+    const handleScroll = () => {
+        toTop?.classList.toggle('visible', window.scrollY > 400);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    toTop?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* -----------------------------------------------------
+       7. Keyboard navigation
+    ----------------------------------------------------- */
+    document.addEventListener('keydown', (e) => {
+        const tag = (e.target.tagName || '').toLowerCase();
+        const inField = ['input', 'textarea', 'select'].includes(tag);
+
+        if (e.key === 'Escape') {
+            // Esc clears search if focused, otherwise closes sidebar
+            if (document.activeElement === searchInput && searchInput.value) {
+                searchInput.value = '';
+                applySearch();
+                return;
+            }
+            closeSidebar();
+            return;
+        }
+
+        // "/" focuses search when projects section is active
+        if (e.key === '/' && !inField) {
+            const projectsActive = $('#projects')?.classList.contains('active');
+            if (projectsActive && searchInput) {
+                e.preventDefault();
+                searchInput.focus();
+                searchInput.select();
+                return;
+            }
+        }
+
+        if (inField) return;
+
+        const current = $('.section.active')?.id;
+        if (!current) return;
+        const idx = order.indexOf(current);
+        if (idx === -1) return;
+
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'j') {
+            e.preventDefault();
+            goTo(order[(idx + 1) % order.length]);
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'k') {
+            e.preventDefault();
+            goTo(order[(idx - 1 + order.length) % order.length]);
+        }
+    });
+
+    /* -----------------------------------------------------
+       8. Live time + presence
+    ----------------------------------------------------- */
+    const timeEl = $('#status-time');
+
+    const tickClock = () => {
+        if (!timeEl) return;
+        let value = '';
+        try {
+            value = new Date().toLocaleTimeString('en-GB', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false,
+                timeZone: 'Africa/Casablanca'
+            });
+        } catch (e) { /* timezone unsupported */ }
+
+        if (!value) {
+            // Fallback: use the visitor's local time, which is fine
+            const d = new Date();
+            value =
+                String(d.getHours()).padStart(2, '0') + ':' +
+                String(d.getMinutes()).padStart(2, '0');
+        }
+        timeEl.textContent = value;
+    };
+
+    tickClock();
+    setInterval(tickClock, 30 * 1000);
+
+    /* -----------------------------------------------------
+       9. Cursor halo
+    ----------------------------------------------------- */
+    const halo = $('#bg-halo');
+    if (halo && !reduceMotion && window.matchMedia('(min-width: 901px)').matches) {
+        let raf = null;
+        let targetX = window.innerWidth / 2;
+        let targetY = window.innerHeight / 2;
+
+        const moveHalo = () => {
+            halo.style.left = targetX + 'px';
+            halo.style.top  = targetY + 'px';
+            raf = null;
+        };
+
+        document.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+            if (!halo.classList.contains('visible')) halo.classList.add('visible');
+            if (!raf) raf = requestAnimationFrame(moveHalo);
+        }, { passive: true });
+
+        document.addEventListener('mouseleave', () => halo.classList.remove('visible'));
+
+        setTimeout(() => halo.classList.add('visible'), 800);
+    }
+
+    /* -----------------------------------------------------
+      10. Scroll reveal
+    ----------------------------------------------------- */
+    let revealObserver = null;
+
+    const armReveals = () => {
+        const active = $('.section.active');
+        if (!active) return;
+
+        const targets = $$('.role, .service, .stat, .kv, .prow, .featured, .card, .process-step, .skill-group, .lang-list li, .contact-list li', active);
+        targets.forEach(el => {
+            if (!el.classList.contains('reveal')) el.classList.add('reveal');
+            el.classList.remove('in');
+        });
+
+        if (reduceMotion) {
+            targets.forEach(el => el.classList.add('in'));
+            return;
+        }
+
+        revealObserver?.disconnect();
+        revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in');
+                    revealObserver.unobserve(entry.target);
                 }
             });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        targets.forEach(el => revealObserver.observe(el));
+    };
+
+    armReveals();
+
+    /* -----------------------------------------------------
+      11. Counter animation
+    ----------------------------------------------------- */
+    let countersDone = false;
+
+    const animateCounters = () => {
+        if (reduceMotion) return;
+
+        $$('.stat-num').forEach(el => {
+            const original = el.dataset.original || el.textContent.trim();
+            el.dataset.original = original;
+
+            const match = original.match(/^(\d+)(.*)$/);
+            if (!match) return;
+            const target = parseInt(match[1], 10);
+            const suffix = match[2] || '';
+
+            const duration = 900;
+            const start = performance.now();
+
+            const step = (now) => {
+                const t = Math.min(1, (now - start) / duration);
+                const eased = 1 - Math.pow(1 - t, 3);
+                el.textContent = Math.round(target * eased) + suffix;
+                if (t < 1) requestAnimationFrame(step);
+                else el.textContent = original;
+            };
+
+            requestAnimationFrame(step);
         });
-    });
-});
+    };
+
+    const expSection = $('#experience');
+    if (expSection && 'IntersectionObserver' in window) {
+        const expObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && expSection.classList.contains('active') && !countersDone) {
+                    countersDone = true;
+                    animateCounters();
+                }
+            });
+        }, { threshold: 0.2 });
+        expObs.observe(expSection);
+    }
+
+    /* -----------------------------------------------------
+      12. Keyboard hint
+    ----------------------------------------------------- */
+    const hint = $('#kbd-hint');
+    if (hint && !sessionStorage.getItem('kbdHintShown') && window.matchMedia('(min-width: 901px)').matches) {
+        setTimeout(() => {
+            hint.classList.add('show');
+            sessionStorage.setItem('kbdHintShown', '1');
+            setTimeout(() => hint.classList.remove('show'), 4500);
+        }, 2000);
+    }
+
+})();

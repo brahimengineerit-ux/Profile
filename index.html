@@ -1,1054 +1,762 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brahim Ait-Mlouk — AI Engineer & Consultant</title>
-    
-    <!-- Preconnect for faster font loading -->
+    <title>Brahim Ait-Mlouk — AI Engineer</title>
+    <meta name="description" content="Brahim Ait-Mlouk — AI Engineer & Backend Developer. Python, FastAPI, LLM integrations, RAG pipelines. Based in Morocco, open to roles in Germany.">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css?v=3.0">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🤖%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js" type="module"></script>
+    <link rel="stylesheet" href="css/styles.css?v=4.7">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Inter,sans-serif' font-size='16' font-weight='700' fill='white'%3EB%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-    <!-- Neural Network Canvas -->
-    <canvas id="neural-canvas"></canvas>
 
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loading-screen">
-        <div class="loading-content">
-            <div class="loading-logo">
-                <span class="logo-text">B</span>
-                <span class="logo-dot">.</span>
-            </div>
-            <div class="loading-bar">
-                <div class="loading-progress"></div>
-            </div>
-            <div class="loading-text" data-en="Initializing..." data-de="Wird geladen...">Initializing...</div>
-        </div>
-    </div>
+<!-- Background layers -->
+<div class="bg-layer" aria-hidden="true"></div>
+<div class="bg-halo" id="bg-halo" aria-hidden="true"></div>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="back-to-top" title="Back to top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M18 15l-6-6-6 6"/>
-        </svg>
-    </button>
+<!-- ============================================================
+     SIDEBAR
+============================================================ -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
 
-    <!-- Mobile Top Bar -->
-    <div class="mobile-top-bar">
-        <button class="hamburger" id="hamburger-menu" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <div class="top-controls">
-            <div class="theme-toggle" id="theme-toggle-mobile" title="Toggle dark mode">
-                <div class="theme-toggle-track">
-                    <span class="theme-icon sun">☀️</span>
-                    <span class="theme-icon moon">🌙</span>
-                </div>
-                <div class="theme-toggle-thumb"></div>
-            </div>
-            <div class="language-switcher">
-                <button class="lang-btn active" data-lang="en">
-                    <span class="lang-flag">🇬🇧</span>
-                    <span class="lang-text">EN</span>
-                </button>
-                <button class="lang-btn" data-lang="de">
-                    <span class="lang-flag">🇩🇪</span>
-                    <span class="lang-text">DE</span>
-                </button>
-            </div>
-        </div>
-    </div>
+        <header class="sidebar-head">
+            <a href="#" class="brand" data-section="home">
+                <span class="brand-mark">B</span>
+                <span class="brand-name">Brahim Ait-Mlouk</span>
+            </a>
+            <p class="brand-role" data-en="AI Engineer · Backend Developer" data-de="AI Engineer · Backend-Entwickler">AI Engineer · Backend Developer</p>
+        </header>
 
-    <!-- Theme & Language Controls (Desktop) -->
-    <div class="top-controls desktop-only">
-        <div class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
-            <div class="theme-toggle-track">
-                <span class="theme-icon sun">☀️</span>
-                <span class="theme-icon moon">🌙</span>
-            </div>
-            <div class="theme-toggle-thumb"></div>
+        <div class="status-block" aria-live="polite">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span class="status-text">
+                <span class="status-time" id="status-time">--:--</span>
+                <span class="status-loc">Rabat · Online</span>
+            </span>
         </div>
-        <div class="language-switcher">
-            <button class="lang-btn active" data-lang="en" id="lang-en">
-                <span class="lang-flag">🇬🇧</span>
-                <span class="lang-text">EN</span>
-            </button>
-            <button class="lang-btn" data-lang="de" id="lang-de">
-                <span class="lang-flag">🇩🇪</span>
-                <span class="lang-text">DE</span>
-            </button>
-        </div>
-    </div>
 
-    <!-- Left Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <div class="avatar-container">
-                <div class="avatar">
-                    <span class="avatar-text">BM</span>
-                </div>
-                <div class="status-indicator"></div>
-            </div>
-            <h1>Brahim Ait-Mlouk</h1>
-            <p class="subtitle">
-                <span class="typing-text" data-en="AI Engineer &amp; Consultant" data-de="AI Engineer &amp; Berater">AI Engineer &amp; Consultant</span>
-            </p>
-        </div>
-        
-        <div class="sidebar-quote">
-            <svg class="quote-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" opacity="0.5">
-                <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
-            </svg>
-            <p data-en="We live in a world where growth comes from building projects" data-de="Wir leben in einer Welt, in der Wachstum durch das Erstellen von Projekten entsteht">We live in a world where growth comes from building projects</p>
-        </div>
-        
-        <nav>
-            <ul id="mobile-nav">
-                <li>
-                    <a href="#" data-section="home" class="nav-link active">
-                        <span class="nav-icon">🏠</span>
-                        <span data-en="Home" data-de="Startseite">Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-section="services" class="nav-link">
-                        <span class="nav-icon">💡</span>
-                        <span data-en="Services" data-de="Leistungen">Services</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-section="education" class="nav-link">
-                        <span class="nav-icon">🎓</span>
-                        <span data-en="Education" data-de="Bildung">Education</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-section="experience" class="nav-link">
-                        <span class="nav-icon">💼</span>
-                        <span data-en="Experience" data-de="Erfahrung">Experience</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-section="projects" class="nav-link">
-                        <span class="nav-icon">🚀</span>
-                        <span data-en="Projects" data-de="Projekte">Projects</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-section="contact" class="nav-link">
-                        <span class="nav-icon">📬</span>
-                        <span data-en="Contact" data-de="Kontakt">Contact</span>
-                    </a>
-                </li>
+        <script>
+        (function(){
+            function tick(){
+                var el=document.getElementById('status-time');
+                if(!el)return;
+                var v='';
+                try{
+                    v=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Africa/Casablanca'});
+                }catch(e){}
+                if(!v){
+                    var d=new Date();
+                    v=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+                }
+                el.textContent=v;
+            }
+            tick();
+            setInterval(tick,30000);
+        })();
+        </script>
+
+        <nav class="nav" aria-label="Primary">
+            <p class="nav-label" data-en="Navigation" data-de="Navigation">Navigation</p>
+            <ul>
+                <li><a href="#" class="nav-link active" data-section="home" onclick="document.getElementById('sidebar').classList.remove('open');var b=document.getElementById('sb-backdrop');if(b)b.classList.remove('visible');"><span data-en="Overview" data-de="Übersicht">Overview</span><span class="nav-key">01</span></a></li>
+                <li><a href="#" class="nav-link" data-section="services" onclick="document.getElementById('sidebar').classList.remove('open');var b=document.getElementById('sb-backdrop');if(b)b.classList.remove('visible');"><span data-en="Services" data-de="Leistungen">Services</span><span class="nav-key">02</span></a></li>
+                <li><a href="#" class="nav-link" data-section="experience" onclick="document.getElementById('sidebar').classList.remove('open');var b=document.getElementById('sb-backdrop');if(b)b.classList.remove('visible');"><span data-en="Experience" data-de="Erfahrung">Experience</span><span class="nav-key">03</span></a></li>
+                <li><a href="#" class="nav-link" data-section="projects" onclick="document.getElementById('sidebar').classList.remove('open');var b=document.getElementById('sb-backdrop');if(b)b.classList.remove('visible');"><span data-en="Projects" data-de="Projekte">Projects</span><span class="nav-key">04</span></a></li>
+                <li><a href="#" class="nav-link" data-section="education" onclick="document.getElementById('sidebar').classList.remove('open');var b=document.getElementById('sb-backdrop');if(b)b.classList.remove('visible');"><span data-en="Education" data-de="Bildung">Education</span><span class="nav-key">05</span></a></li>
+                <li><a href="#" class="nav-link" data-section="contact" onclick="document.getElementById('sidebar').classList.remove('open');var b=document.getElementById('sb-backdrop');if(b)b.classList.remove('visible');"><span data-en="Contact" data-de="Kontakt">Contact</span><span class="nav-key">06</span></a></li>
             </ul>
         </nav>
 
-        <div class="sidebar-footer">
-            <div class="social-links">
-                <a href="https://github.com/brahimengineerit-ux" target="_blank" class="social-link" title="GitHub">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                </a>
-                <a href="https://www.linkedin.com/in/brahim-3b636b385" target="_blank" class="social-link" title="LinkedIn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                </a>
-                <a href="mailto:brahim.engineer.it@gmail.com" class="social-link" title="Email">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                </a>
-            </div>
-            <p class="copyright">© 2025 Brahim A.M.</p>
+        <footer class="sidebar-foot">
+            <ul class="socials">
+                <li><a href="https://github.com/brahimengineerit-ux" target="_blank" rel="noopener" aria-label="GitHub">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.27-5.24-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17.91-.25 1.89-.38 2.86-.38.97 0 1.95.13 2.86.38 2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.73.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56C20.21 21.39 23.5 17.07 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+                </a></li>
+                <li><a href="https://www.linkedin.com/in/brahim-3b636b385" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.44-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+                </a></li>
+                <li><a href="mailto:brahim.engineer.it@gmail.com" aria-label="Email">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </a></li>
+            </ul>
+            <p class="sidebar-meta">© 2025 — <span data-en="Available for hire" data-de="Verfügbar für neue Rollen">Available for hire</span></p>
+        </footer>
+
+    </div>
+</aside>
+
+<!-- ============================================================
+     TOP BAR (mobile + controls)
+============================================================ -->
+<div class="topbar">
+    <button class="topbar-menu" id="menu-toggle" type="button" aria-label="Toggle navigation" onclick="document.getElementById('sidebar').classList.toggle('open');var b=document.getElementById('sb-backdrop');if(!b){b=document.createElement('div');b.id='sb-backdrop';b.className='sidebar-backdrop';b.onclick=function(){document.getElementById('sidebar').classList.remove('open');b.classList.remove('visible');};document.body.appendChild(b);}b.classList.toggle('visible',document.getElementById('sidebar').classList.contains('open'));return false;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <span class="topbar-brand">Brahim Ait-Mlouk</span>
+
+    <div class="avail-pill avail-pill-topbar" aria-hidden="false">
+        <span class="avail-dot" aria-hidden="true"></span>
+        <span data-en="Available for new roles · Open to relocation" data-de="Verfügbar für neue Rollen · Offen für Umzug">Available for new roles · Open to relocation</span>
+    </div>
+
+    <div class="topbar-controls">
+        <div class="lang-toggle" role="tablist" aria-label="Language">
+            <button class="lang-btn active" data-lang="en" role="tab">EN</button>
+            <button class="lang-btn" data-lang="de" role="tab">DE</button>
         </div>
-    </aside>
+        <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">
+            <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+            <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+    </div>
+</div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Background Elements -->
-        <div class="bg-gradient"></div>
-        <div class="bg-grid"></div>
+<!-- ============================================================
+     MAIN
+============================================================ -->
+<main class="main">
 
-        <!-- Section 1: Home -->
-        <section id="home" class="content-section active">
-            <div class="section-container">
-                <!-- Hero Area -->
-                <div class="hero fade-in">
-                    <div class="hero-badge">
-                        <span class="badge-dot"></span>
-                        <span data-en="Open to consulting &amp; full-time roles" data-de="Offen für Beratung &amp; Vollzeitstellen">Open to consulting &amp; full-time roles</span>
+    <!-- ====================================================
+         SECTION: OVERVIEW
+    ==================================================== -->
+    <section id="home" class="section active">
+        <div class="container">
+
+            <div class="hero-grid">
+                <div class="hero-main">
+
+            <div class="avail-pill avail-pill-mobile" aria-hidden="false">
+                <span class="avail-dot" aria-hidden="true"></span>
+                <span data-en="Available for new roles · Open to relocation" data-de="Verfügbar für neue Rollen · Offen für Umzug">Available for new roles · Open to relocation</span>
+            </div>
+
+
+            <h1 class="display">
+                <span data-en="AI Engineer building production systems" data-de="AI Engineer für produktive Systeme">AI Engineer building production systems</span>
+            </h1>
+
+            <p class="lede" data-en="I design, build and deploy AI-powered backends. My path moved from full-stack development to Python tools engineering, and now to AI engineering — three years at Stellantis through Alten Maroc, shipping 15+ Python tools and AI systems for document processing, RAG search and LLM-driven workflows in production." data-de="Ich konzipiere, entwickle und deploye AI-gestützte Backends. Mein Weg führte von Full-Stack-Entwicklung über Python-Tools-Engineering zur AI-Entwicklung — drei Jahre bei Stellantis über Alten Maroc, mit über 15 Python-Tools und AI-Systemen für Dokumentenverarbeitung, RAG-Suche und LLM-gestützte Workflows in Produktion.">I design, build and deploy AI-powered backends. My path moved from full-stack development to Python tools engineering, and now to AI engineering — three years at Stellantis through Alten Maroc, shipping 15+ Python tools and AI systems for document processing, RAG search and LLM-driven workflows in production.</p>
+
+            <div class="cta-row">
+                <a href="cv/CV_Brahim_Baha_Mlouk_EN.pdf" class="btn btn-primary cv-btn" data-lang-show="en" download>
+                    <span data-en="Download CV" data-de="CV herunterladen">Download CV</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </a>
+                <a href="cv/CV_Brahim_Baha_Mlouk_DE.pdf" class="btn btn-primary cv-btn" data-lang-show="de" download>
+                    <span>Lebenslauf</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </a>
+                <a href="mailto:brahim.engineer.it@gmail.com" class="btn btn-secondary">
+                    <span data-en="Get in touch" data-de="Kontakt aufnehmen">Get in touch</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+                </div><!-- /.hero-main -->
+
+                <aside class="hero-art" aria-hidden="true">
+                    <dotlottie-wc src="https://lottie.host/cd499949-028c-4831-b9c2-0282aa409efc/kJZI0PCazF.lottie" autoplay loop></dotlottie-wc>
+                </aside>
+            </div><!-- /.hero-grid -->
+
+            <!-- Quick facts -->
+            <div class="kv-grid">
+                <div class="kv">
+                    <span class="kv-label" data-en="Based in" data-de="Standort">Based in</span>
+                    <span class="kv-value">Rabat, Morocco</span>
+                </div>
+                <div class="kv">
+                    <span class="kv-label" data-en="Work model" data-de="Arbeitsmodell">Work model</span>
+                    <span class="kv-value" data-en="Remote · Hybrid · On-site" data-de="Remote · Hybrid · Vor Ort">Remote · Hybrid</span>
+                </div>
+                <div class="kv">
+                    <span class="kv-label" data-en="Experience" data-de="Erfahrung">Experience</span>
+                    <span class="kv-value" data-en="3+ years professional" data-de="3+ Jahre Berufserfahrung">3+ years professional</span>
+                </div>
+                <div class="kv">
+                    <span class="kv-label" data-en="Languages" data-de="Sprachen">Languages</span>
+                    <span class="kv-value">EN · FR · AR · DE (A2)</span>
+                </div>
+            </div>
+
+            <!-- Tech stack -->
+            <div class="block">
+                <h2 class="block-title" data-en="Stack" data-de="Stack">Stack</h2>
+                <ul class="chip-list">
+                    <li class="chip">Python</li>
+                    <li class="chip">FastAPI</li>
+                    <li class="chip">Django</li>
+                    <li class="chip">OpenAI API</li>
+                    <li class="chip">Claude API</li>
+                    <li class="chip">LangChain</li>
+                    <li class="chip">RAG</li>
+                    <li class="chip">FAISS</li>
+                    <li class="chip">Chroma</li>
+                    <li class="chip">PostgreSQL</li>
+                    <li class="chip">Redis</li>
+                    <li class="chip">Docker</li>
+                    <li class="chip">Linux</li>
+                    <li class="chip">Git</li>
+                    <li class="chip">CI/CD</li>
+                </ul>
+            </div>
+
+            <!-- Core expertise -->
+            <div class="block">
+                <h2 class="block-title" data-en="Core focus" data-de="Schwerpunkte">Core focus</h2>
+                <div class="card-grid card-grid-2">
+                    <article class="card">
+                        <h3 class="card-title" data-en="Tools engineering" data-de="Tools-Engineering">Tools engineering</h3>
+                        <p class="card-body" data-en="Internal Python tooling at scale — CLI utilities, GUI apps, reusable libraries and Flask/FastAPI services that remove manual operational load." data-de="Interne Python-Tools im großen Maßstab — CLI-Utilities, GUI-Apps, wiederverwendbare Bibliotheken und Flask/FastAPI-Services, die manuelle Abläufe entlasten.">Internal Python tooling at scale — CLI utilities, GUI apps, reusable libraries and Flask/FastAPI services that remove manual operational load.</p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card-title" data-en="Backend APIs" data-de="Backend-APIs">Backend APIs</h3>
+                        <p class="card-body" data-en="FastAPI services exposing AI features behind auth, rate-limiting, async processing, monitoring and clean OpenAPI contracts." data-de="FastAPI-Services mit Auth, Rate-Limiting, asynchroner Verarbeitung, Monitoring und sauberen OpenAPI-Verträgen.">FastAPI services exposing AI features behind auth, rate-limiting, async processing, monitoring and clean OpenAPI contracts.</p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card-title" data-en="LLM integration" data-de="LLM-Integration">LLM integration</h3>
+                        <p class="card-body" data-en="Connecting OpenAI and Claude to production backends — structured output, function calling, streaming, fallback logic, cost guards." data-de="Anbindung von OpenAI und Claude an produktive Backends — strukturierte Ausgabe, Function Calling, Streaming, Fallback-Logik, Kostenkontrolle.">Connecting OpenAI and Claude to production backends — structured output, function calling, streaming, fallback logic, cost guards.</p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card-title" data-en="RAG &amp; semantic search" data-de="RAG &amp; Semantische Suche">RAG &amp; semantic search</h3>
+                        <p class="card-body" data-en="Document Q&amp;A and knowledge retrieval over large corpora. Chunking strategy, hybrid retrieval, re-ranking, evaluation." data-de="Dokumenten-Q&amp;A und Wissens-Retrieval über große Datenbestände. Chunking, hybrides Retrieval, Re-Ranking, Evaluation.">Document Q&amp;A and knowledge retrieval over large corpora. Chunking strategy, hybrid retrieval, re-ranking, evaluation.</p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card-title" data-en="Workflow automation" data-de="Workflow-Automatisierung">Workflow automation</h3>
+                        <p class="card-body" data-en="Document processing, OCR, classification and routing. End-to-end pipelines that replace manual operations at scale." data-de="Dokumentenverarbeitung, OCR, Klassifizierung und Routing. End-to-End-Pipelines, die manuelle Abläufe ersetzen.">Document processing, OCR, classification and routing. End-to-end pipelines that replace manual operations at scale.</p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card-title" data-en="AWS &amp; cloud AI" data-de="AWS &amp; Cloud-AI">AWS &amp; cloud AI</h3>
+                        <p class="card-body" data-en="Deploying AI services on AWS — EC2, S3, Lambda, IAM, secure key distribution, hybrid encryption, and cost-aware infrastructure for LLM workloads." data-de="AI-Services auf AWS deployen — EC2, S3, Lambda, IAM, sichere Schlüsselverteilung, hybride Verschlüsselung und kostenbewusste Infrastruktur für LLM-Workloads.">Deploying AI services on AWS — EC2, S3, Lambda, IAM, secure key distribution, hybrid encryption, and cost-aware infrastructure for LLM workloads.</p>
+                    </article>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION: SERVICES
+    ==================================================== -->
+    <section id="services" class="section">
+        <div class="container">
+
+            <header class="section-head">
+                <span class="section-num">02</span>
+                <h2 class="section-title" data-en="Services" data-de="Leistungen">Services</h2>
+                <p class="section-sub" data-en="Practical AI engineering and consulting — from strategy to shipped product." data-de="Praktisches AI-Engineering und Beratung — von der Strategie bis zur Auslieferung.">Practical AI engineering and consulting — from strategy to shipped product.</p>
+            </header>
+
+            <ol class="service-list">
+                <li class="service">
+                    <div class="service-num">01</div>
+                    <div class="service-body">
+                        <h3 class="service-title" data-en="LLM integration &amp; engineering" data-de="LLM-Integration &amp; Engineering">LLM integration &amp; engineering</h3>
+                        <p data-en="Connecting OpenAI, Claude and other LLM APIs to your existing backend. Prompt design, structured output, fallback logic, cost &amp; latency optimization." data-de="Anbindung von OpenAI, Claude und anderen LLM-APIs an Ihr bestehendes Backend. Prompt-Design, strukturierte Ausgabe, Fallback-Logik, Kosten- und Latenzoptimierung.">Connecting OpenAI, Claude and other LLM APIs to your existing backend. Prompt design, structured output, fallback logic, cost &amp; latency optimization.</p>
                     </div>
-                    <h2 class="hero-title">
-                        <span class="title-line" data-en="AI Engineer &amp;" data-de="AI Engineer &amp;">AI Engineer &amp;</span>
-                        <span class="title-line gradient-text" data-en="Consultant" data-de="Berater">Consultant</span>
-                    </h2>
-                    <p class="hero-description" data-en-html="I help companies <strong>design, build and deploy AI systems</strong> that work in production. With 3+ years at Stellantis via Alten Maroc, I've shipped <strong>LLM-powered pipelines, RAG search engines and 15+ automation tools</strong> that reduced manual operations at scale. I bridge the gap between AI research and reliable backend engineering." data-de-html="Ich helfe Unternehmen dabei, <strong>KI-Systeme zu konzipieren, zu entwickeln und produktiv einzusetzen</strong>. Mit 3+ Jahren Erfahrung bei Stellantis über Alten Maroc habe ich <strong>LLM-gestützte Pipelines, RAG-Suchmaschinen und 15+ Automatisierungstools</strong> geliefert, die manuelle Abläufe in großem Maßstab reduziert haben.">I help companies <strong>design, build and deploy AI systems</strong> that work in production. With 3+ years at Stellantis via Alten Maroc, I've shipped <strong>LLM-powered pipelines, RAG search engines and 15+ automation tools</strong> that reduced manual operations at scale. I bridge the gap between AI research and reliable backend engineering.</p>
-                    
-                    <!-- CV Download Buttons -->
-                    <div class="hero-cv-buttons">
-                        <a href="cv/CV_Brahim_Baha_Mlouk_EN.pdf" class="cta-button cv-btn" data-lang-show="en" download>
-                            <span>📄 Download CV</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                                <polyline points="7,10 12,15 17,10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
-                            </svg>
+                </li>
+                <li class="service">
+                    <div class="service-num">02</div>
+                    <div class="service-body">
+                        <h3 class="service-title" data-en="RAG &amp; semantic search" data-de="RAG &amp; Semantische Suche">RAG &amp; semantic search</h3>
+                        <p data-en="Knowledge bases your users can actually query. Document ingestion, FAISS &amp; Chroma vector stores, hybrid retrieval and re-ranking." data-de="Wissensdatenbanken, die Nutzer wirklich abfragen können. Dokumenten-Ingestion, FAISS- und Chroma-Vektorspeicher, hybrides Retrieval und Re-Ranking.">Knowledge bases your users can actually query. Document ingestion, FAISS &amp; Chroma vector stores, hybrid retrieval and re-ranking.</p>
+                    </div>
+                </li>
+                <li class="service">
+                    <div class="service-num">03</div>
+                    <div class="service-body">
+                        <h3 class="service-title" data-en="AI backend APIs (FastAPI)" data-de="AI-Backend-APIs (FastAPI)">AI backend APIs (FastAPI)</h3>
+                        <p data-en="Production-grade FastAPI services with auth, rate limiting, streaming, async processing, dockerized deploys and CI/CD." data-de="Produktionsreife FastAPI-Services mit Auth, Rate-Limiting, Streaming, asynchroner Verarbeitung, Docker-Deployments und CI/CD.">Production-grade FastAPI services with auth, rate limiting, streaming, async processing, dockerized deploys and CI/CD.</p>
+                    </div>
+                </li>
+                <li class="service">
+                    <div class="service-num">04</div>
+                    <div class="service-body">
+                        <h3 class="service-title" data-en="Tools engineering &amp; Python automation" data-de="Tools-Engineering &amp; Python-Automatisierung">Tools engineering &amp; Python automation</h3>
+                        <p data-en="Internal Python tooling teams actually use. CLI utilities, GUI apps, reusable libraries, Flask/FastAPI services, and CI/CD pipelines that remove manual operational load and standardise integrations across teams." data-de="Interne Python-Tools, die Teams tatsächlich nutzen. CLI-Utilities, GUI-Apps, wiederverwendbare Bibliotheken, Flask/FastAPI-Services und CI/CD-Pipelines, die manuelle Abläufe entlasten und Integrationen teamübergreifend standardisieren.">Internal Python tooling teams actually use. CLI utilities, GUI apps, reusable libraries, Flask/FastAPI services, and CI/CD pipelines that remove manual operational load and standardise integrations across teams.</p>
+                    </div>
+                </li>
+                <li class="service">
+                    <div class="service-num">05</div>
+                    <div class="service-body">
+                        <h3 class="service-title" data-en="Document &amp; workflow automation" data-de="Dokumenten- &amp; Workflow-Automatisierung">Document &amp; workflow automation</h3>
+                        <p data-en="Automating document-heavy operations end-to-end. OCR, intelligent extraction, classification, routing and integration with existing systems." data-de="End-to-End-Automatisierung dokumentenintensiver Abläufe. OCR, intelligente Extraktion, Klassifizierung, Routing und Integration in bestehende Systeme.">Automating document-heavy operations end-to-end. OCR, intelligent extraction, classification, routing and integration with existing systems.</p>
+                    </div>
+                </li>
+                <li class="service">
+                    <div class="service-num">06</div>
+                    <div class="service-body">
+                        <h3 class="service-title" data-en="AI strategy &amp; consulting" data-de="AI-Strategie &amp; Beratung">AI strategy &amp; consulting</h3>
+                        <p data-en="Use-case discovery and feasibility, build-versus-buy analysis, technical roadmap and architecture review for teams adopting AI." data-de="Identifikation von Anwendungsfällen, Machbarkeit, Make-or-Buy, technische Roadmap und Architektur-Review für Teams mit AI-Adoption.">Use-case discovery and feasibility, build-versus-buy analysis, technical roadmap and architecture review for teams adopting AI.</p>
+                    </div>
+                </li>
+            </ol>
+
+            <!-- Process -->
+            <div class="block">
+                <h2 class="block-title" data-en="How I work" data-de="Wie ich arbeite">How I work</h2>
+                <div class="process">
+                    <div class="process-step">
+                        <span class="process-num">01</span>
+                        <h4 data-en="Discovery" data-de="Discovery">Discovery</h4>
+                        <p data-en="Understand the problem, the data and the constraints before writing code." data-de="Problem, Daten und Rahmenbedingungen verstehen, bevor Code geschrieben wird.">Understand the problem, the data and the constraints before writing code.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="process-num">02</span>
+                        <h4 data-en="Design" data-de="Design">Design</h4>
+                        <p data-en="Architect a minimal, working solution. Pick the right tools, not the loudest ones." data-de="Eine minimale, funktionierende Lösung entwerfen. Die richtigen Werkzeuge wählen, nicht die lautesten.">Architect a minimal, working solution. Pick the right tools, not the loudest ones.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="process-num">03</span>
+                        <h4 data-en="Build" data-de="Build">Build</h4>
+                        <p data-en="Ship clean, tested, documented Python. Iterate weekly with the stakeholder." data-de="Sauberen, getesteten, dokumentierten Python-Code liefern. Wöchentliche Iteration mit dem Stakeholder.">Ship clean, tested, documented Python. Iterate weekly with the stakeholder.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="process-num">04</span>
+                        <h4 data-en="Hand-off" data-de="Übergabe">Hand-off</h4>
+                        <p data-en="Deploy to production, document everything, transfer knowledge to the team." data-de="Produktiv ausrollen, alles dokumentieren, Wissen ans Team übergeben.">Deploy to production, document everything, transfer knowledge to the team.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION: EXPERIENCE
+    ==================================================== -->
+    <section id="experience" class="section">
+        <div class="container">
+
+            <header class="section-head">
+                <span class="section-num">03</span>
+                <h2 class="section-title" data-en="Experience" data-de="Erfahrung">Experience</h2>
+                <p class="section-sub" data-en="Three years across automotive (Stellantis) and FinTech, shipping Python and AI systems in production." data-de="Drei Jahre in Automotive (Stellantis) und FinTech — Python- und AI-Systeme in Produktion.">Three years across automotive (Stellantis) and FinTech, shipping Python and AI systems in production.</p>
+            </header>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-num">3+</span>
+                    <span class="stat-label" data-en="Years professional" data-de="Jahre Berufserfahrung">Years professional</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num">15+</span>
+                    <span class="stat-label" data-en="Tools shipped" data-de="Tools ausgeliefert">Tools shipped</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num">2</span>
+                    <span class="stat-label" data-en="Industries" data-de="Branchen">Industries</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num">4</span>
+                    <span class="stat-label" data-en="Working languages" data-de="Arbeitssprachen">Working languages</span>
+                </div>
+            </div>
+
+            <!-- Roles -->
+            <ol class="timeline">
+
+                <li class="role">
+                    <div class="role-meta">
+                        <span class="role-date">Jan 2025 — <span data-en="Present" data-de="Heute">Present</span></span>
+                        <span class="role-tag" data-en="Current" data-de="Aktuell">Current</span>
+                    </div>
+                    <h3 class="role-title" data-en="AI Engineer &amp; Consultant" data-de="AI Engineer &amp; Berater">AI Engineer &amp; Consultant</h3>
+                    <p class="role-company">Alten Maroc → Stellantis · <span data-en="Rabat, hybrid" data-de="Rabat, hybrid">Rabat, hybrid</span></p>
+                    <ul class="role-bullets">
+                        <li data-en="Integrated OpenAI APIs into backend systems for document processing, classification and information extraction." data-de="OpenAI-APIs in Backend-Systeme für Dokumentenverarbeitung, Klassifizierung und Informationsextraktion integriert.">Integrated OpenAI APIs into backend systems for document processing, classification and information extraction.</li>
+                        <li data-en="Designed AI-driven workflows with prompt engineering, structured-output validation and error-handling mechanisms." data-de="AI-gesteuerte Workflows mit Prompt-Engineering, strukturierter Ausgabevalidierung und Fehlerbehandlung entworfen.">Designed AI-driven workflows with prompt engineering, structured-output validation and error-handling mechanisms.</li>
+                        <li data-en="Developed FastAPI services exposing AI functionality with authentication, rate limiting and monitoring." data-de="FastAPI-Services für AI-Funktionalität mit Authentifizierung, Rate-Limiting und Monitoring entwickelt.">Developed FastAPI services exposing AI functionality with authentication, rate limiting and monitoring.</li>
+                        <li data-en="Built RAG components for internal knowledge search and question-answering." data-de="RAG-Komponenten für interne Wissenssuche und Frage-Antwort-Systeme entwickelt.">Built RAG components for internal knowledge search and question-answering.</li>
+                    </ul>
+                    <ul class="chip-list chip-list-sm">
+                        <li class="chip">Python</li><li class="chip">FastAPI</li><li class="chip">OpenAI API</li><li class="chip">RAG</li><li class="chip">LangChain</li><li class="chip">FAISS</li><li class="chip">Chroma</li>
+                    </ul>
+                </li>
+
+                <li class="role">
+                    <div class="role-meta">
+                        <span class="role-date">Sep 2023 — Dec 2024</span>
+                    </div>
+                    <h3 class="role-title" data-en="Python Developer &amp; Tools Engineer" data-de="Python-Entwickler &amp; Tools Engineer">Python Developer &amp; Tools Engineer</h3>
+                    <p class="role-company">Alten Maroc → Stellantis · <span data-en="Automotive, Rabat" data-de="Automotive, Rabat">Automotive, Rabat</span></p>
+                    <ul class="role-bullets">
+                        <li data-en="Designed and developed Python tools — CLI utilities, GUI apps, reusable libraries and web applications." data-de="Python-Tools entworfen und entwickelt — CLI-Utilities, GUI-Apps, wiederverwendbare Bibliotheken und Webanwendungen.">Designed and developed Python tools — CLI utilities, GUI apps, reusable libraries and web applications.</li>
+                        <li data-en="Shipped 15+ automation tools for file and document processing, removing significant manual operational load." data-de="15+ Automatisierungstools für Datei- und Dokumentenverarbeitung ausgeliefert, die manuelle Arbeit erheblich reduziert haben.">Shipped 15+ automation tools for file and document processing, removing significant manual operational load.</li>
+                        <li data-en="Created reusable Python libraries adopted across teams, standardizing API integrations and data validation." data-de="Wiederverwendbare Python-Bibliotheken erstellt, die teamübergreifend genutzt werden — standardisierte API-Integrationen und Datenvalidierung.">Created reusable Python libraries adopted across teams, standardizing API integrations and data validation.</li>
+                        <li data-en="Collaborated daily with French and Brazilian teams in Agile / Scrum across time zones." data-de="Tägliche Zusammenarbeit mit französischen und brasilianischen Teams in Agile / Scrum über Zeitzonen hinweg.">Collaborated daily with French and Brazilian teams in Agile / Scrum across time zones.</li>
+                    </ul>
+                    <ul class="chip-list chip-list-sm">
+                        <li class="chip">Python</li><li class="chip">Django</li><li class="chip">FastAPI</li><li class="chip">PostgreSQL</li><li class="chip">Docker</li><li class="chip">Linux</li><li class="chip">Git</li>
+                    </ul>
+                </li>
+
+                <li class="role">
+                    <div class="role-meta">
+                        <span class="role-date">Jul 2022 — Jul 2023</span>
+                    </div>
+                    <h3 class="role-title" data-en="Junior Python &amp; Full-Stack Developer" data-de="Junior Python &amp; Full-Stack Entwickler">Junior Python &amp; Full-Stack Developer</h3>
+                    <p class="role-company">Conexcap Technology · <span data-en="FinTech, remote" data-de="FinTech, remote">FinTech, remote</span></p>
+                    <ul class="role-bullets">
+                        <li data-en="Contributed to development and maintenance of a production FinTech platform — backend and frontend." data-de="Mitarbeit an Entwicklung und Wartung einer produktiven FinTech-Plattform — Backend und Frontend.">Contributed to development and maintenance of a production FinTech platform — backend and frontend.</li>
+                        <li data-en="Debugged production issues by analyzing logs and databases; improved system stability." data-de="Produktionsprobleme durch Log- und Datenbankanalyse debuggt; Systemstabilität verbessert.">Debugged production issues by analyzing logs and databases; improved system stability.</li>
+                        <li data-en="Implemented bug fixes, enhancements and contributed to automated testing." data-de="Bugfixes und Verbesserungen umgesetzt; Beitrag zu automatisierten Tests.">Implemented bug fixes, enhancements and contributed to automated testing.</li>
+                    </ul>
+                    <ul class="chip-list chip-list-sm">
+                        <li class="chip">Python</li><li class="chip">Django</li><li class="chip">PostgreSQL</li><li class="chip">REST</li><li class="chip">JavaScript</li>
+                    </ul>
+                </li>
+
+            </ol>
+
+            <!-- Skills matrix -->
+            <div class="block">
+                <h2 class="block-title" data-en="Skills" data-de="Fähigkeiten">Skills</h2>
+                <div class="skills">
+                    <div class="skill-group">
+                        <h4 data-en="Programming" data-de="Programmierung">Programming</h4>
+                        <ul class="chip-list chip-list-sm">
+                            <li class="chip">Python</li><li class="chip">Django</li><li class="chip">FastAPI</li><li class="chip">REST</li><li class="chip">PostgreSQL</li><li class="chip">SQLite</li><li class="chip">Bash</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
+                        <h4 data-en="AI &amp; LLM" data-de="AI &amp; LLM">AI &amp; LLM</h4>
+                        <ul class="chip-list chip-list-sm">
+                            <li class="chip">OpenAI API</li><li class="chip">Claude API</li><li class="chip">Prompt eng.</li><li class="chip">RAG</li><li class="chip">LangChain</li><li class="chip">FAISS</li><li class="chip">Chroma</li><li class="chip">Embeddings</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
+                        <h4 data-en="DevOps" data-de="DevOps">DevOps</h4>
+                        <ul class="chip-list chip-list-sm">
+                            <li class="chip">Docker</li><li class="chip">TeamCity</li><li class="chip">Git</li><li class="chip">Linux</li><li class="chip">CI/CD</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
+                        <h4 data-en="Web" data-de="Web">Web</h4>
+                        <ul class="chip-list chip-list-sm">
+                            <li class="chip">HTML</li><li class="chip">CSS</li><li class="chip">JavaScript</li><li class="chip">Bootstrap</li><li class="chip">Jinja2</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION: PROJECTS
+    ==================================================== -->
+    <section id="projects" class="section">
+        <div class="container">
+
+            <header class="section-head">
+                <span class="section-num">04</span>
+                <h2 class="section-title" data-en="Projects" data-de="Projekte">Projects</h2>
+                <p class="section-sub" data-en="A selection of AI engineering projects — Python, FastAPI, and LLM APIs in practice." data-de="Eine Auswahl von AI-Engineering-Projekten — Python, FastAPI und LLM-APIs in der Praxis.">A selection of AI engineering projects — Python, FastAPI, and LLM APIs in practice.</p>
+            </header>
+
+            <!-- Featured project -->
+            <article class="featured" data-level="medium">
+                <div class="featured-pattern" aria-hidden="true"></div>
+                <div class="featured-tag">
+                    <span class="featured-dot" aria-hidden="true"></span>
+                    <span data-en="Featured project" data-de="Hervorgehobenes Projekt">Featured project</span>
+                </div>
+                <h3 class="featured-title" data-en="Document Q&amp;A Assistant" data-de="Dokumenten-Q&amp;A Assistent">Document Q&amp;A Assistant</h3>
+                <p class="featured-desc" data-en="A retrieval-augmented generation pipeline that answers questions strictly from the documents you upload. FAISS vector store, hybrid retrieval, citation-aware responses, and an evaluation harness for accuracy regression." data-de="Eine RAG-Pipeline, die Fragen ausschließlich anhand der hochgeladenen Dokumente beantwortet. FAISS-Vektorspeicher, hybrides Retrieval, Quellenbezug und Evaluations-Harness gegen Genauigkeits-Regressionen.">A retrieval-augmented generation pipeline that answers questions strictly from the documents you upload. FAISS vector store, hybrid retrieval, citation-aware responses, and an evaluation harness for accuracy regression.</p>
+                <div class="featured-meta">
+                    <span class="featured-status done">
+                        <span class="status-mark" aria-hidden="true"></span>
+                        <span data-en="Completed" data-de="Fertig">Completed</span>
+                    </span>
+                    <ul class="chip-list chip-list-sm featured-chips">
+                        <li class="chip">Python</li><li class="chip">FAISS</li><li class="chip">LangChain</li><li class="chip">Embeddings</li>
+                    </ul>
+                    <a href="https://github.com/brahimengineerit-ux" class="featured-link" target="_blank" rel="noopener">
+                        <span data-en="View on GitHub" data-de="Auf GitHub ansehen">View on GitHub</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Search -->
+            <div class="psearch" role="search">
+                <svg class="psearch-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="search" id="project-search" class="psearch-input" autocomplete="off" spellcheck="false" data-en-placeholder="Search projects, tech, descriptions…" data-de-placeholder="Projekte, Tech, Beschreibungen suchen…" placeholder="Search projects, tech, descriptions…" aria-label="Search projects" oninput="(function(inp){var q=inp.value.trim().toLowerCase();var rows=document.querySelectorAll('#plist-body .prow');var visible=0;rows.forEach(function(r){var t=(r.querySelector('.prow-title')||{}).textContent||'';var d=(r.querySelector('.prow-desc')||{}).textContent||'';var s=(r.querySelector('.prow-stack')||{}).textContent||'';var hay=(t+' '+d+' '+s).toLowerCase();var match=!q||hay.indexOf(q)>-1;r.classList.toggle('hidden',!match);if(match)visible++;});var emp=document.getElementById('plist-empty');if(emp)emp.hidden=visible!==0;})(this);">
+                <kbd class="psearch-kbd" aria-hidden="true">/</kbd>
+            </div>
+
+            <!-- Editorial list -->
+            <div class="plist">
+                <div class="plist-head">
+                    <span class="plist-col plist-col-num">No.</span>
+                    <span class="plist-col plist-col-name" data-en="Project" data-de="Projekt">Project</span>
+                    <span class="plist-col plist-col-stack" data-en="Stack" data-de="Stack">Stack</span>
+                    <span class="plist-col plist-col-status" data-en="Status" data-de="Status">Status</span>
+                </div>
+
+                <ul class="plist-body" id="plist-body">
+
+                    <li class="prow" data-level="easy">
+                        <a class="prow-inner" href="https://github.com/brahimengineerit-ux/ai-expense-assistant" target="_blank" rel="noopener">
+                            <span class="prow-num">001</span>
+                            <div class="prow-body">
+                                <span class="prow-title">AI Expense &amp; Receipt Parser</span>
+                                <span class="prow-desc" data-en="Extracts structured expense data from text, receipts (OCR) and invoices." data-de="Extrahiert strukturierte Ausgabendaten aus Text, Belegen (OCR) und Rechnungen.">Extracts structured expense data from text, receipts (OCR) and invoices.</span>
+                            </div>
+                            <span class="prow-stack">Python · OCR</span>
+                            <span class="prow-status done"><span class="status-mark"></span><span data-en="Done" data-de="Fertig">Done</span></span>
                         </a>
-                        <a href="cv/CV_Brahim_Baha_Mlouk_DE.pdf" class="cta-button cv-btn" data-lang-show="de" download>
-                            <span>📄 Lebenslauf herunterladen</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                                <polyline points="7,10 12,15 17,10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
-                            </svg>
+                    </li>
+
+                    <li class="prow" data-level="easy">
+                        <a class="prow-inner" href="https://github.com/brahimengineerit-ux/AI-Form-to-JSON-Converter" target="_blank" rel="noopener">
+                            <span class="prow-num">002</span>
+                            <div class="prow-body">
+                                <span class="prow-title">AI Form-to-JSON Converter</span>
+                                <span class="prow-desc" data-en="Converts free-text input into clean JSON following a strict schema." data-de="Konvertiert Freitext in sauberes JSON nach striktem Schema.">Converts free-text input into clean JSON following a strict schema.</span>
+                            </div>
+                            <span class="prow-stack">Python · OpenAI</span>
+                            <span class="prow-status done"><span class="status-mark"></span><span data-en="Done" data-de="Fertig">Done</span></span>
                         </a>
-                    </div>
-                </div>
+                    </li>
 
-                <!-- Tech Stack -->
-                <div class="tech-stack fade-in fade-in-delay-1">
-                    <h3 class="section-label" data-en="Tech Stack" data-de="Technologien">Tech Stack</h3>
-                    <div class="tech-pills">
-                        <span class="tech-pill"><span class="pill-icon">🐍</span> Python</span>
-                        <span class="tech-pill"><span class="pill-icon">⚡</span> FastAPI</span>
-                        <span class="tech-pill"><span class="pill-icon">🧠</span> LLM Engineering</span>
-                        <span class="tech-pill"><span class="pill-icon">📚</span> RAG Pipelines</span>
-                        <span class="tech-pill"><span class="pill-icon">🤖</span> AI Agents</span>
-                        <span class="tech-pill"><span class="pill-icon">🎯</span> Prompt Engineering</span>
-                        <span class="tech-pill"><span class="pill-icon">🔗</span> LangChain</span>
-                        <span class="tech-pill"><span class="pill-icon">🌐</span> OpenAI API</span>
-                        <span class="tech-pill"><span class="pill-icon">💬</span> Claude API</span>
-                        <span class="tech-pill"><span class="pill-icon">📊</span> FAISS / Chroma</span>
-                        <span class="tech-pill"><span class="pill-icon">🐘</span> PostgreSQL</span>
-                        <span class="tech-pill"><span class="pill-icon">🐳</span> Docker</span>
-                        <span class="tech-pill"><span class="pill-icon">🎸</span> Django</span>
-                        <span class="tech-pill"><span class="pill-icon">🔧</span> Git / CI-CD</span>
-                    </div>
-                </div>
-
-                <!-- Bento Grid -->
-                <div class="bento-grid fade-in fade-in-delay-2">
-                    <!-- Work Authorization Card -->
-                    <div class="bento-card bento-large">
-                        <div class="bento-header">
-                            <span class="bento-icon">🇪🇺</span>
-                            <h4 data-en="Work Authorization" data-de="Arbeitserlaubnis">Work Authorization</h4>
-                        </div>
-                        <ul class="check-list">
-                            <li>
-                                <span class="check-icon">✓</span>
-                                <span data-en="EU Blue Card eligible" data-de="EU Blue Card berechtigt">EU Blue Card eligible</span>
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                <span data-en="German skilled worker visa eligible" data-de="Berechtigt für Fachkräftevisum">German skilled worker visa eligible</span>
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                <span data-en="Open to relocation to Germany" data-de="Offen für Umzug nach Deutschland">Open to relocation to Germany</span>
-                            </li>
-                            <li>
-                                <span class="check-icon">✓</span>
-                                <span data-en="Master's equivalent to German degree" data-de="Master gleichwertig zu deutschem Abschluss">Master's equivalent to German degree</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Languages Card -->
-                    <div class="bento-card">
-                        <div class="bento-header">
-                            <span class="bento-icon">🌍</span>
-                            <h4 data-en="Languages" data-de="Sprachen">Languages</h4>
-                        </div>
-                        <div class="language-bars">
-                            <div class="language-item">
-                                <div class="language-info">
-                                    <span data-en="Tamazight" data-de="Tamazight">Tamazight</span>
-                                    <span class="language-badge native" data-en="Native" data-de="Muttersprache">Native</span>
-                                </div>
-                                <div class="language-bar"><div class="language-fill" style="width: 100%"></div></div>
+                    <li class="prow" data-level="easy">
+                        <a class="prow-inner" href="https://github.com/brahimengineerit-ux/AI-Resume-Analyzer" target="_blank" rel="noopener">
+                            <span class="prow-num">003</span>
+                            <div class="prow-body">
+                                <span class="prow-title">AI Resume Analyzer</span>
+                                <span class="prow-desc" data-en="Analyzes CV text, highlights skills and gaps, scores job matches." data-de="Analysiert Lebensläufe, hebt Fähigkeiten und Lücken hervor, bewertet Job-Matches.">Analyzes CV text, highlights skills and gaps, scores job matches.</span>
                             </div>
-                            <div class="language-item">
-                                <div class="language-info">
-                                    <span data-en="Arabic" data-de="Arabisch">Arabic</span>
-                                    <span class="language-badge fluent" data-en="Fluent" data-de="Fließend">Native</span>
-                                </div>
-                                <div class="language-bar"><div class="language-fill" style="width: 95%"></div></div>
-                            </div>
-                            <div class="language-item">
-                                <div class="language-info">
-                                    <span data-en="English" data-de="Englisch">English</span>
-                                    <span class="language-badge fluent">Fluent</span>
-                                </div>
-                                <div class="language-bar"><div class="language-fill" style="width: 85%"></div></div>
-                            </div>
-                            <div class="language-item">
-                                <div class="language-info">
-                                    <span data-en="German" data-de="Deutsch(Zielniveau B2)">German(targeting B2)</span>
-                                    <span class="language-badge learning">A2</span>
-                                </div>
-                                <div class="language-bar"><div class="language-fill" style="width: 35%"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Interests -->
-                <div class="interests-section fade-in fade-in-delay-3">
-                    <h3 class="section-label" data-en="Core Expertise" data-de="Kernkompetenzen">Core Expertise</h3>
-                    <div class="interests-grid">
-                        <div class="interest-card">
-                            <div class="interest-icon">🧠</div>
-                            <h5 data-en="LLM Engineering" data-de="LLM-Engineering">LLM Engineering</h5>
-                            <p data-en="Integrating OpenAI & Claude into production systems — structured outputs, function calling, streaming" data-de="Integration von OpenAI & Claude in Produktionssysteme — strukturierte Ausgaben, Function Calling, Streaming">Integrating OpenAI & Claude into production systems — structured outputs, function calling, streaming</p>
-                        </div>
-                        <div class="interest-card">
-                            <div class="interest-icon">📚</div>
-                            <h5 data-en="RAG & Knowledge Systems" data-de="RAG & Wissenssysteme">RAG & Knowledge Systems</h5>
-                            <p data-en="Document Q&A, semantic search over large corpora, hybrid retrieval with FAISS & Chroma" data-de="Dokumenten-Q&A, semantische Suche, hybrides Retrieval mit FAISS & Chroma">Document Q&A, semantic search over large corpora, hybrid retrieval with FAISS & Chroma</p>
-                        </div>
-                        <div class="interest-card">
-                            <div class="interest-icon">⚡</div>
-                            <h5 data-en="AI-Powered APIs" data-de="KI-gestützte APIs">AI-Powered APIs</h5>
-                            <p data-en="Production FastAPI services exposing AI features — auth, rate-limiting, async, monitoring" data-de="Produktive FastAPI-Services mit KI-Funktionen — Auth, Rate-Limiting, Async, Monitoring">Production FastAPI services exposing AI features — auth, rate-limiting, async, monitoring</p>
-                        </div>
-                        <div class="interest-card">
-                            <div class="interest-icon">⚙️</div>
-                            <h5 data-en="Workflow Automation" data-de="Workflow-Automatisierung">Workflow Automation</h5>
-                            <p data-en="End-to-end document processing, data extraction and business process automation with AI" data-de="Durchgängige Dokumentenverarbeitung, Datenextraktion und Geschäftsprozessautomatisierung mit KI">End-to-end document processing, data extraction and business process automation with AI</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 2: Services -->
-        <section id="services" class="content-section">
-            <div class="section-container">
-                <div class="section-header fade-in">
-                    <span class="section-tag" data-en="What I Offer" data-de="Mein Angebot">What I Offer</span>
-                    <h2 data-en="Services" data-de="Leistungen">Services</h2>
-                    <p class="section-subtitle" data-en-html="Practical AI engineering and consulting — from strategy to shipped product" data-de-html="Praktisches AI-Engineering und Beratung — von der Strategie bis zum fertigen Produkt">Practical AI engineering and consulting — from strategy to shipped product</p>
-                </div>
-
-                <!-- Services Grid -->
-                <div class="services-grid fade-in fade-in-delay-1">
-                    <div class="service-card service-featured">
-                        <div class="service-icon-wrap">🧠</div>
-                        <h4 data-en="LLM Integration & Engineering" data-de="LLM-Integration & Engineering">LLM Integration & Engineering</h4>
-                        <p data-en="I connect OpenAI, Claude, and other LLM APIs to your existing backend. Covers prompt design, structured output, fallback logic, and cost optimization." data-de="Ich verbinde OpenAI, Claude und andere LLM-APIs mit Ihrem bestehenden Backend. Umfasst Prompt-Design, strukturierte Ausgabe, Fallback-Logik und Kostenoptimierung.">I connect OpenAI, Claude, and other LLM APIs to your existing backend. Covers prompt design, structured output, fallback logic, and cost optimization.</p>
-                        <ul class="service-bullets">
-                            <li data-en="Prompt engineering & system design" data-de="Prompt Engineering & Systemdesign">Prompt engineering & system design</li>
-                            <li data-en="Structured output & JSON schema validation" data-de="Strukturierte Ausgabe & JSON-Schema-Validierung">Structured output & JSON schema validation</li>
-                            <li data-en="Cost & latency optimization" data-de="Kosten- & Latenzoptimierung">Cost & latency optimization</li>
-                        </ul>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon-wrap">📚</div>
-                        <h4 data-en="RAG & Semantic Search" data-de="RAG & Semantische Suche">RAG & Semantic Search</h4>
-                        <p data-en="Build knowledge bases your users can actually query. I design retrieval pipelines that stay accurate at scale — from chunking strategy to re-ranking." data-de="Aufbau von Wissensdatenbanken, die Benutzer wirklich abfragen können. Ich entwerfe Retrieval-Pipelines, die im Maßstab genau bleiben.">Build knowledge bases your users can actually query. I design retrieval pipelines that stay accurate at scale — from chunking strategy to re-ranking.</p>
-                        <ul class="service-bullets">
-                            <li data-en="Document ingestion & embedding pipelines" data-de="Dokumentenverarbeitung & Embedding-Pipelines">Document ingestion & embedding pipelines</li>
-                            <li data-en="FAISS / Chroma vector store setup" data-de="FAISS / Chroma Vektorspeicher-Setup">FAISS / Chroma vector store setup</li>
-                            <li data-en="Hybrid retrieval & re-ranking" data-de="Hybrides Retrieval & Re-Ranking">Hybrid retrieval & re-ranking</li>
-                        </ul>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon-wrap">⚡</div>
-                        <h4 data-en="AI Backend APIs (FastAPI)" data-de="KI-Backend-APIs (FastAPI)">AI Backend APIs (FastAPI)</h4>
-                        <p data-en="Turn your AI prototype into a production-grade service. I build FastAPI backends with auth, rate limiting, streaming, and async processing." data-de="Verwandeln Sie Ihren KI-Prototypen in einen produktionsreifen Service. Ich baue FastAPI-Backends mit Auth, Rate-Limiting, Streaming und asynchroner Verarbeitung.">Turn your AI prototype into a production-grade service. I build FastAPI backends with auth, rate limiting, streaming, and async processing.</p>
-                        <ul class="service-bullets">
-                            <li data-en="REST API design & documentation" data-de="REST-API-Design & Dokumentation">REST API design & documentation</li>
-                            <li data-en="Authentication, rate limiting, monitoring" data-de="Authentifizierung, Rate-Limiting, Monitoring">Authentication, rate limiting, monitoring</li>
-                            <li data-en="Dockerized & CI/CD-ready deployments" data-de="Dockerisierte & CI/CD-fähige Deployments">Dockerized & CI/CD-ready deployments</li>
-                        </ul>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon-wrap">⚙️</div>
-                        <h4 data-en="AI Automation & Document Processing" data-de="KI-Automatisierung & Dokumentenverarbeitung">AI Automation & Document Processing</h4>
-                        <p data-en="Automate repetitive, document-heavy workflows. I've built 15+ tools at Stellantis that eliminated hours of manual work for cross-functional teams." data-de="Automatisieren Sie repetitive, dokumentenintensive Workflows. Ich habe 15+ Tools bei Stellantis gebaut, die stundenlange manuelle Arbeit eliminierten.">Automate repetitive, document-heavy workflows. I've built 15+ tools at Stellantis that eliminated hours of manual work for cross-functional teams.</p>
-                        <ul class="service-bullets">
-                            <li data-en="OCR & intelligent document extraction" data-de="OCR & intelligente Dokumentenextraktion">OCR & intelligent document extraction</li>
-                            <li data-en="Data classification & routing" data-de="Datenklassifizierung & Routing">Data classification & routing</li>
-                            <li data-en="Workflow integration with existing systems" data-de="Workflow-Integration mit bestehenden Systemen">Workflow integration with existing systems</li>
-                        </ul>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon-wrap">🎯</div>
-                        <h4 data-en="AI Strategy & Consulting" data-de="KI-Strategie & Beratung">AI Strategy & Consulting</h4>
-                        <p data-en="Not sure where to start with AI? I help you identify high-ROI use cases, evaluate tools, and build a roadmap that avoids expensive mistakes." data-de="Nicht sicher, wo Sie mit KI anfangen sollen? Ich helfe Ihnen, High-ROI-Anwendungsfälle zu identifizieren und eine Roadmap zu erstellen.">Not sure where to start with AI? I help you identify high-ROI use cases, evaluate tools, and build a roadmap that avoids expensive mistakes.</p>
-                        <ul class="service-bullets">
-                            <li data-en="Use-case discovery & feasibility assessment" data-de="Anwendungsfall-Entdeckung & Machbarkeitsbewertung">Use-case discovery & feasibility assessment</li>
-                            <li data-en="Build vs. buy analysis" data-de="Eigenentwicklung vs. Einkauf Analyse">Build vs. buy analysis</li>
-                            <li data-en="Technical roadmap & architecture review" data-de="Technische Roadmap & Architektur-Review">Technical roadmap & architecture review</li>
-                        </ul>
-                    </div>
-
-                    <div class="service-card service-cta-card">
-                        <div class="service-icon-wrap">📬</div>
-                        <h4 data-en="Let's Talk" data-de="Sprechen wir">Let's Talk</h4>
-                        <p data-en="Have a project in mind? I'm available for consulting engagements, freelance projects, and full-time roles." data-de="Haben Sie ein Projekt im Sinn? Ich bin verfügbar für Beratungsprojekte, Freelance-Projekte und Vollzeitstellen.">Have a project in mind? I'm available for consulting engagements, freelance projects, and full-time roles.</p>
-                        <a href="mailto:brahim.engineer.it@gmail.com" class="service-cta-btn">
-                            <span data-en="Get in Touch" data-de="Kontakt aufnehmen">Get in Touch</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <line x1="5" y1="12" x2="19" y2="12"/>
-                                <polyline points="12,5 19,12 12,19"/>
-                            </svg>
+                            <span class="prow-stack">Python · PyPDF2</span>
+                            <span class="prow-status done"><span class="status-mark"></span><span data-en="Done" data-de="Fertig">Done</span></span>
                         </a>
-                    </div>
-                </div>
+                    </li>
 
-                <!-- Process Section -->
-                <div class="process-section fade-in fade-in-delay-2">
-                    <h3 class="section-label" data-en="How I Work" data-de="Wie ich arbeite">How I Work</h3>
-                    <div class="process-steps">
-                        <div class="process-step">
-                            <div class="step-number">01</div>
-                            <div class="step-content">
-                                <h5 data-en="Discovery" data-de="Entdeckung">Discovery</h5>
-                                <p data-en="Understand your problem, data, and constraints before writing a line of code." data-de="Verstehen Sie Ihr Problem, Ihre Daten und Einschränkungen, bevor eine Zeile Code geschrieben wird.">Understand your problem, data, and constraints before writing a line of code.</p>
+                    <li class="prow" data-level="easy">
+                        <a class="prow-inner" href="https://github.com/brahimengineerit-ux/AI-Customer-Support-Auto-Responder" target="_blank" rel="noopener">
+                            <span class="prow-num">004</span>
+                            <div class="prow-body">
+                                <span class="prow-title">AI Customer Support Auto-Responder</span>
+                                <span class="prow-desc" data-en="Generates consistent replies based on predefined support rules." data-de="Erzeugt konsistente Antworten anhand definierter Support-Regeln.">Generates consistent replies based on predefined support rules.</span>
                             </div>
-                        </div>
-                        <div class="process-connector"></div>
-                        <div class="process-step">
-                            <div class="step-number">02</div>
-                            <div class="step-content">
-                                <h5 data-en="Design" data-de="Design">Design</h5>
-                                <p data-en="Architect a minimal, working solution. Choose the right tools — not the trendiest ones." data-de="Entwerfen Sie eine minimale, funktionierende Lösung. Wählen Sie die richtigen Werkzeuge.">Architect a minimal, working solution. Choose the right tools — not the trendiest ones.</p>
+                            <span class="prow-stack">FastAPI · LLM</span>
+                            <span class="prow-status wip"><span class="status-mark"></span><span data-en="WIP" data-de="In Arbeit">WIP</span></span>
+                        </a>
+                    </li>
+
+                    <li class="prow" data-level="medium">
+                        <div class="prow-inner prow-inner-static">
+                            <span class="prow-num">005</span>
+                            <div class="prow-body">
+                                <span class="prow-title" data-en="Company Policy Assistant" data-de="Unternehmens-Policy-Assistent">Company Policy Assistant</span>
+                                <span class="prow-desc" data-en="Internal RAG assistant for employees, grounded in source documents." data-de="Interner RAG-Assistent für Mitarbeitende, mit Quellenbezug.">Internal RAG assistant for employees, grounded in source documents.</span>
                             </div>
+                            <span class="prow-stack">RAG · Chroma</span>
+                            <span class="prow-status planned"><span class="status-mark"></span><span data-en="Planned" data-de="Geplant">Planned</span></span>
                         </div>
-                        <div class="process-connector"></div>
-                        <div class="process-step">
-                            <div class="step-number">03</div>
-                            <div class="step-content">
-                                <h5 data-en="Build" data-de="Entwicklung">Build</h5>
-                                <p data-en="Ship clean, tested, documented Python code. Iterate fast with weekly check-ins." data-de="Liefern Sie sauberen, getesteten, dokumentierten Python-Code. Iterieren Sie schnell.">Ship clean, tested, documented Python code. Iterate fast with weekly check-ins.</p>
+                    </li>
+
+                    <li class="prow" data-level="medium">
+                        <div class="prow-inner prow-inner-static">
+                            <span class="prow-num">006</span>
+                            <div class="prow-body">
+                                <span class="prow-title">AI Error Log Explainer</span>
+                                <span class="prow-desc" data-en="Explains backend errors and suggests fixes scoped to known patterns." data-de="Erklärt Backend-Fehler und schlägt Fixes vor — auf bekannte Muster beschränkt.">Explains backend errors and suggests fixes scoped to known patterns.</span>
                             </div>
+                            <span class="prow-stack">Python · LLM</span>
+                            <span class="prow-status planned"><span class="status-mark"></span><span data-en="Planned" data-de="Geplant">Planned</span></span>
                         </div>
-                        <div class="process-connector"></div>
-                        <div class="process-step">
-                            <div class="step-number">04</div>
-                            <div class="step-content">
-                                <h5 data-en="Deploy & Hand-off" data-de="Deployment & Übergabe">Deploy & Hand-off</h5>
-                                <p data-en="Deliver a production-ready system with full documentation and knowledge transfer." data-de="Lieferung eines produktionsbereiten Systems mit vollständiger Dokumentation und Wissenstransfer.">Deliver a production-ready system with full documentation and knowledge transfer.</p>
+                    </li>
+
+                    <li class="prow" data-level="medium">
+                        <div class="prow-inner prow-inner-static">
+                            <span class="prow-num">007</span>
+                            <div class="prow-body">
+                                <span class="prow-title">AI Code Review Assistant</span>
+                                <span class="prow-desc" data-en="Reviews diffs and flags readability or security issues." data-de="Reviewt Diffs und markiert Lesbarkeits- oder Sicherheitsprobleme.">Reviews diffs and flags readability or security issues.</span>
                             </div>
+                            <span class="prow-stack">Python · AST</span>
+                            <span class="prow-status planned"><span class="status-mark"></span><span data-en="Planned" data-de="Geplant">Planned</span></span>
                         </div>
-                    </div>
-                </div>
+                    </li>
+
+                    <li class="prow" data-level="advanced">
+                        <div class="prow-inner prow-inner-static">
+                            <span class="prow-num">008</span>
+                            <div class="prow-body">
+                                <span class="prow-title">Multi-Document RAG Assistant</span>
+                                <span class="prow-desc" data-en="Searches across multiple corpora, compares answers, surfaces sources." data-de="Sucht über mehrere Corpora, vergleicht Antworten und zeigt Quellen.">Searches across multiple corpora, compares answers, surfaces sources.</span>
+                            </div>
+                            <span class="prow-stack">RAG · Multi-index</span>
+                            <span class="prow-status planned"><span class="status-mark"></span><span data-en="Planned" data-de="Geplant">Planned</span></span>
+                        </div>
+                    </li>
+
+                    <li class="prow" data-level="advanced">
+                        <div class="prow-inner prow-inner-static">
+                            <span class="prow-num">009</span>
+                            <div class="prow-body">
+                                <span class="prow-title">AI Workflow Automation Engine</span>
+                                <span class="prow-desc" data-en="Chains AI tasks into pipelines with retries, caching and observability." data-de="Verkettet AI-Tasks zu Pipelines — mit Retries, Caching und Observability.">Chains AI tasks into pipelines with retries, caching and observability.</span>
+                            </div>
+                            <span class="prow-stack">Python · Celery</span>
+                            <span class="prow-status planned"><span class="status-mark"></span><span data-en="Planned" data-de="Geplant">Planned</span></span>
+                        </div>
+                    </li>
+
+                    <li class="prow" data-level="advanced">
+                        <div class="prow-inner prow-inner-static">
+                            <span class="prow-num">010</span>
+                            <div class="prow-body">
+                                <span class="prow-title">AI Chat Memory Service</span>
+                                <span class="prow-desc" data-en="Persistent, structured conversation memory with summarization and recall." data-de="Persistenter, strukturierter Konversationsspeicher — mit Summarisierung und Recall.">Persistent, structured conversation memory with summarization and recall.</span>
+                            </div>
+                            <span class="prow-stack">Python · Redis</span>
+                            <span class="prow-status planned"><span class="status-mark"></span><span data-en="Planned" data-de="Geplant">Planned</span></span>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <p class="plist-empty" id="plist-empty" hidden>
+                    <span data-en="No projects match your search." data-de="Keine Projekte gefunden.">No projects match your search.</span>
+                </p>
             </div>
-        </section>
 
-        <!-- Section 4: Education -->
-        <section id="education" class="content-section">
-            <div class="section-container">
-                <div class="section-header fade-in">
-                    <span class="section-tag" data-en="Background" data-de="Hintergrund">Background</span>
-                    <h2 data-en="Education" data-de="Bildung">Education</h2>
-                    <p class="section-subtitle" data-en-html="My academic journey in Computer Science and Software Engineering" data-de-html="Mein akademischer Werdegang in Informatik und Software-Engineering">My academic journey in Computer Science and Software Engineering</p>
-                </div>
+            <p class="muted">
+                <span data-en="See all repositories on" data-de="Alle Repositories auf">See all repositories on</span>
+                <a href="https://github.com/brahimengineerit-ux?tab=repositories" target="_blank" rel="noopener" class="inline-link">GitHub →</a>
+            </p>
 
-                <div class="education-timeline fade-in fade-in-delay-1">
-                    <!-- Master's -->
-                    <div class="edu-card">
-                        <div class="edu-year-badge">2020 - 2022</div>
-                        <div class="edu-logo">
-                            <img src="images/Logo_fssm.jpg" alt="Faculty of Sciences Semlalia Marrakech Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                            <div class="edu-logo-fallback">🎓</div>
-                        </div>
-                        <div class="edu-content">
-                            <div class="edu-type master">
-                                <span>🎓</span>
-                                <span data-en="Master's Degree" data-de="Master-Abschluss">Master's Degree</span>
-                            </div>
-                            <h4 data-en="Information Systems Engineering" data-de="Informationssystem-Engineering">Information Systems Engineering</h4>
-                            <p class="edu-institution" data-en="Faculty of Sciences Semlalia - Cadi Ayyad University" data-de="Fakultät der Wissenschaften Semlalia - Cadi Ayyad Universität">Faculty of Sciences Semlalia - Cadi Ayyad University</p>
-                            <p class="edu-location">📍 <span data-en="Marrakech, Morocco" data-de="Marrakesch, Marokko">Marrakech, Morocco</span></p>
-                            <div class="edu-highlight">
-                                <span>🇩🇪</span>
-                                <span data-en="Recognized equivalent to German Master's degree" data-de="Anerkannt als gleichwertig zum deutschen Master-Abschluss">Recognized equivalent to German Master's degree</span>
-                            </div>
-                        </div>
+        </div>
+    </section>
+
+    <!-- ====================================================
+         SECTION: EDUCATION
+    ==================================================== -->
+    <section id="education" class="section">
+        <div class="container">
+
+            <header class="section-head">
+                <span class="section-num">05</span>
+                <h2 class="section-title" data-en="Education" data-de="Bildung">Education</h2>
+                <p class="section-sub" data-en="Computer science and software engineering — accredited equivalence to a German Master's." data-de="Informatik und Software-Engineering — anerkannte Gleichwertigkeit zum deutschen Master.">Computer science and software engineering — accredited equivalence to a German Master's.</p>
+            </header>
+
+            <ol class="timeline">
+
+                <li class="role">
+                    <div class="role-meta">
+                        <span class="role-date">2020 — 2022</span>
+                        <span class="role-tag" data-en="Master's" data-de="Master">Master's</span>
                     </div>
+                    <h3 class="role-title" data-en="M.Sc. Information Systems Engineering" data-de="M.Sc. Informationssystem-Engineering">M.Sc. Information Systems Engineering</h3>
+                    <p class="role-company">Faculty of Sciences Semlalia · Cadi Ayyad University · <span data-en="Marrakech, Morocco" data-de="Marrakesch, Marokko">Marrakech, Morocco</span></p>
+                    <p class="role-note" data-en="Recognised equivalent to a German Master's degree (anabin / ZAB)." data-de="Als gleichwertig zum deutschen Master-Abschluss anerkannt (anabin / ZAB).">Recognised equivalent to a German Master's degree (anabin / ZAB).</p>
+                </li>
 
-                    <!-- Bachelor's -->
-                    <div class="edu-card">
-                        <div class="edu-year-badge">2016 - 2020</div>
-                        <div class="edu-logo">
-                            <img src="images/logo_fst.png" alt="FST Errachidia Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                            <div class="edu-logo-fallback">🎓</div>
-                        </div>
-                        <div class="edu-content">
-                            <div class="edu-type bachelor">
-                                <span>🎓</span>
-                                <span data-en="Bachelor's Degree" data-de="Bachelor-Abschluss">Bachelor's Degree</span>
-                            </div>
-                            <h4 data-en="Software Engineering" data-de="Software-Engineering">Software Engineering</h4>
-                            <p class="edu-institution" data-en="Faculty of Sciences and Techniques - Moulay Ismail University" data-de="Fakultät der Wissenschaften und Techniken - Moulay Ismail Universität">Faculty of Sciences and Techniques - Moulay Ismail University</p>
-                            <p class="edu-location">📍 Errachidia, <span data-en="Morocco" data-de="Marokko">Morocco</span></p>
-                        </div>
+                <li class="role">
+                    <div class="role-meta">
+                        <span class="role-date">2016 — 2020</span>
+                        <span class="role-tag" data-en="Bachelor's" data-de="Bachelor">Bachelor's</span>
                     </div>
+                    <h3 class="role-title" data-en="B.Sc. Software Engineering" data-de="B.Sc. Software-Engineering">B.Sc. Software Engineering</h3>
+                    <p class="role-company">Faculty of Sciences and Techniques · Moulay Ismail University · Errachidia, <span data-en="Morocco" data-de="Marokko">Morocco</span></p>
+                </li>
 
-                    <!-- Baccalaureate -->
-                    <div class="edu-card">
-                        <div class="edu-year-badge">2016</div>
-                        <div class="edu-logo">
-                            <div class="edu-logo-fallback" style="display:flex">📜</div>
-                        </div>
-                        <div class="edu-content">
-                            <div class="edu-type bac">
-                                <span>📜</span>
-                                <span data-en="Baccalaureate" data-de="Abitur">Baccalaureate</span>
-                            </div>
-                            <h4 data-en="Mathematics" data-de="Mathematik">Mathematics</h4>
-                            <p class="edu-institution" data-en="Sidi Ahmed Benaceur High School" data-de="Gymnasium Sidi Ahmed Benaceur">Sidi Ahmed Benaceur High School</p>
-                            <p class="edu-location">📍 Zagora, <span data-en="Morocco" data-de="Marokko">Morocco</span></p>
-                        </div>
+                <li class="role">
+                    <div class="role-meta">
+                        <span class="role-date">2016</span>
+                        <span class="role-tag" data-en="Baccalaureate" data-de="Abitur">Baccalaureate</span>
                     </div>
-                </div>
+                    <h3 class="role-title" data-en="Baccalaureate, Mathematics" data-de="Abitur, Mathematik">Baccalaureate, Mathematics</h3>
+                    <p class="role-company">Sidi Ahmed Benaceur High School · Zagora, <span data-en="Morocco" data-de="Marokko">Morocco</span></p>
+                </li>
+
+            </ol>
+
+            <!-- Languages -->
+            <div class="block">
+                <h2 class="block-title" data-en="Languages" data-de="Sprachen">Languages</h2>
+                <ul class="lang-list">
+                    <li><span class="lang-name">Tamazight</span><span class="lang-level" data-en="Native" data-de="Muttersprache">Native</span></li>
+                    <li><span class="lang-name" data-en="Arabic" data-de="Arabisch">Arabic</span><span class="lang-level" data-en="Native" data-de="Muttersprache">Native</span></li>
+                    <li><span class="lang-name" data-en="French" data-de="Französisch">French</span><span class="lang-level" data-en="Fluent" data-de="Fließend">intermdait</span></li>
+                    <li><span class="lang-name" data-en="English" data-de="Englisch">English</span><span class="lang-level" data-en="Fluent (C1)" data-de="Fließend (C1)">Fluent</span></li>
+                    <li><span class="lang-name" data-en="German" data-de="Deutsch">German</span><span class="lang-level" data-en="A2 — targeting B2" data-de="A2 — Ziel B2">A2 — targeting B2</span></li>
+                </ul>
             </div>
-        </section>
 
-        <!-- Section 3: Experience -->
-        <section id="experience" class="content-section">
-            <div class="section-container">
-                <div class="section-header fade-in">
-                    <span class="section-tag" data-en="Career" data-de="Karriere">Career</span>
-                    <h2 data-en="Experience" data-de="Erfahrung">Experience</h2>
-                    <p class="section-subtitle" data-en-html="My professional journey as AI engineer &amp; consultant in the automotive and FinTech industries" data-de-html="Mein beruflicher Werdegang als AI-Engineer &amp; Berater in der Automobil- und FinTech-Branche">My professional journey as AI engineer &amp; consultant in the automotive and FinTech industries</p>
-                </div>
+        </div>
+    </section>
 
-                <!-- Professional Summary Stats -->
-                <div class="stats-grid fade-in fade-in-delay-1">
-                    <div class="stat-card">
-                        <span class="stat-number">3+</span>
-                        <span class="stat-label" data-en="Years Experience" data-de="Jahre Erfahrung">Years Experience</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">15+</span>
-                        <span class="stat-label" data-en="AI Tools Shipped" data-de="KI-Tools geliefert">AI Tools Shipped</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">2</span>
-                        <span class="stat-label" data-en="Industries Served" data-de="Bediente Branchen">Industries Served</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label" data-en="Remote-Ready" data-de="Remote-fähig">Remote-Ready</span>
-                    </div>
-                </div>
+    <!-- ====================================================
+         SECTION: CONTACT
+    ==================================================== -->
+    <section id="contact" class="section">
+        <div class="container">
 
-                <!-- Experience Timeline -->
-                <div class="experience-timeline fade-in fade-in-delay-1">
-                    
-                    <!-- Timeline Item 1: Current - AI Engineer & Consultant -->
-                    <div class="timeline-item current">
-                        <div class="timeline-marker">
-                            <div class="timeline-dot pulse"></div>
-                            <div class="timeline-line"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-badge current" data-en="Current" data-de="Aktuell">Current</div>
-                            <h4 class="timeline-title">🤖 <span data-en="AI Engineer & Consultant" data-de="AI Engineer & Berater">AI Engineer & Consultant</span></h4>
-                            <p class="timeline-company">Alten Maroc → Stellantis <span class="industry-tag">🤖 AI/LLM</span></p>
-                            <p class="timeline-location">📍 <span data-en="Rabat, Morocco · Hybrid" data-de="Rabat, Marokko · Hybrid">Rabat, Morocco · Hybrid</span></p>
-                            <span class="timeline-date" data-en="Jan 2025 – Present" data-de="Jan 2025 – Heute">Jan 2025 – Present</span>
-                            
-                            <div class="timeline-details">
-                                <ul class="exp-highlights">
-                                    <li data-en="Integrated OpenAI APIs into backend systems for document processing, classification, and information extraction" data-de="Integration von OpenAI APIs in Backend-Systeme für Dokumentenverarbeitung, Klassifizierung und Informationsextraktion">Integrated OpenAI APIs into backend systems for document processing, classification, and information extraction</li>
-                                    <li data-en="Designed AI-driven workflows with prompt engineering, structured output validation, and error-handling mechanisms" data-de="Entwurf von KI-gesteuerten Workflows mit Prompt Engineering, strukturierter Ausgabevalidierung und Fehlerbehandlung">Designed AI-driven workflows with prompt engineering, structured output validation, and error-handling mechanisms</li>
-                                    <li data-en="Developed FastAPI services exposing AI functionality with authentication, rate limiting, and monitoring" data-de="Entwicklung von FastAPI-Services mit KI-Funktionalität, Authentifizierung, Rate-Limiting und Monitoring">Developed FastAPI services exposing AI functionality with authentication, rate limiting, and monitoring</li>
-                                    <li data-en="Built RAG components for internal knowledge search and question-answering" data-de="Aufbau von RAG-Komponenten für interne Wissenssuche und Frage-Antwort-Systeme">Built RAG components for internal knowledge search and question-answering</li>
-                                </ul>
-                                <div class="exp-tech">
-                                    <span>Python</span>
-                                    <span>FastAPI</span>
-                                    <span>OpenAI API</span>
-                                    <span>RAG</span>
-                                    <span>Prompt Engineering</span>
-                                    <span>LangChain</span>
-                                    <span>FAISS</span>
-                                    <span>Chroma</span>
-                                    <span>Embeddings</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <header class="section-head">
+                <span class="section-num">06</span>
+                <h2 class="section-title" data-en="Contact" data-de="Kontakt">Contact</h2>
+                <p class="section-sub" data-en="The fastest way to reach me is email. I usually reply within 24 hours, Monday to Friday." data-de="Am schnellsten erreichen Sie mich per E-Mail. Ich antworte werktags meist innerhalb von 24 Stunden.">The fastest way to reach me is email. I usually reply within 24 hours, Monday to Friday.</p>
+            </header>
 
-                    <!-- Timeline Item 2: Python Developer / Tools Engineer -->
-                    <div class="timeline-item">
-                        <div class="timeline-marker">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-line"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <h4 class="timeline-title">💻 <span data-en="Python Developer / Tools Engineer & Consultant" data-de="Python-Entwickler / Tools Engineer & Berater">Python Developer / Tools Engineer & Consultant</span></h4>
-                            <p class="timeline-company">Alten Maroc → Stellantis <span class="industry-tag">🚗 Automotive</span></p>
-                            <p class="timeline-location">📍 <span data-en="Rabat, Morocco · Hybrid" data-de="Rabat, Marokko · Hybrid">Rabat, Morocco · Hybrid</span></p>
-                            <span class="timeline-date" data-en="Sep 2023 – Dec 2024" data-de="Sep 2023 – Dez 2024">Sep 2023 – Dec 2024</span> <span class="duration-badge">1.3 <span data-en="years" data-de="Jahre">years</span></span>
-                            
-                            <div class="timeline-details">
-                                <div class="exp-achievements">
-                                    <h5 data-en="Key Achievements" data-de="Wichtige Erfolge">Key Achievements</h5>
-                                    <ul class="achievements-list">
-                                        <li>
-                                            <span class="achievement-icon">🔧</span>
-                                            <span data-en="Built 15+ Python automation tools significantly reducing manual operational work" data-de="15+ Python-Automatisierungstools entwickelt, die manuelle Arbeit erheblich reduziert haben">Built 15+ Python automation tools significantly reducing manual operational work</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <ul class="exp-highlights">
-                                    <li data-en="Designed and developed Python-based tools: CLI tools, GUI utilities, reusable libraries, and web applications" data-de="Entwurf und Entwicklung von Python-Tools: CLI-Tools, GUI-Dienstprogramme, wiederverwendbare Bibliotheken und Webanwendungen">Designed and developed Python-based tools: CLI tools, GUI utilities, reusable libraries, and web applications</li>
-                                    <li data-en="Built 15+ Python automation tools for file and document processing and system integrations" data-de="15+ Python-Automatisierungstools für Datei- und Dokumentenverarbeitung sowie Systemintegrationen entwickelt">Built 15+ Python automation tools for file and document processing and system integrations</li>
-                                    <li data-en="Created reusable Python libraries adopted by multiple teams, standardizing API integrations and data validation" data-de="Erstellung wiederverwendbarer Python-Bibliotheken, die von mehreren Teams übernommen wurden">Created reusable Python libraries adopted by multiple teams, standardizing API integrations and data validation</li>
-                                    <li data-en="Collaborated with French and Brazilian teams in Agile (Scrum) across different time zones" data-de="Zusammenarbeit mit französischen und brasilianischen Teams in Agile (Scrum) über verschiedene Zeitzonen">Collaborated with French and Brazilian teams in Agile (Scrum) across different time zones</li>
-                                </ul>
-                                <div class="exp-tech">
-                                    <span>Python</span>
-                                    <span>Django</span>
-                                    <span>FastAPI</span>
-                                    <span>REST APIs</span>
-                                    <span>PostgreSQL</span>
-                                    <span>SQLite</span>
-                                    <span>Git</span>
-                                    <span>Docker</span>
-                                    <span>Linux</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Timeline Item 3: Junior Python / Full-Stack Developer -->
-                    <div class="timeline-item">
-                        <div class="timeline-marker">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-line"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <h4 class="timeline-title">💻 <span data-en="Junior Python / Full-Stack Developer" data-de="Junior Python / Full-Stack Entwickler">Junior Python / Full-Stack Developer</span></h4>
-                            <p class="timeline-company">Conexcap Technology <span class="industry-tag">💼 FinTech</span></p>
-                            <p class="timeline-location">📍 <span data-en="Marrakech, Morocco · Remote" data-de="Marrakesch, Marokko · Remote">Marrakech, Morocco · Remote</span></p>
-                            <span class="timeline-date" data-en="Jul 2022 – Jul 2023" data-de="Jul 2022 – Jul 2023">Jul 2022 – Jul 2023</span> <span class="duration-badge">1 <span data-en="year" data-de="Jahr">year</span></span>
-                            
-                            <div class="timeline-details">
-                                <ul class="exp-highlights">
-                                    <li data-en="Contributed to development and maintenance of a production FinTech platform (backend and frontend)" data-de="Beitrag zur Entwicklung und Wartung einer produktiven FinTech-Plattform (Backend und Frontend)">Contributed to development and maintenance of a production FinTech platform (backend and frontend)</li>
-                                    <li data-en="Debugged production issues by analyzing logs and databases, improving system stability" data-de="Debugging von Produktionsproblemen durch Analyse von Logs und Datenbanken, Verbesserung der Systemstabilität">Debugged production issues by analyzing logs and databases, improving system stability</li>
-                                    <li data-en="Implemented bug fixes and enhancements; contributed to automated testing efforts" data-de="Implementierung von Bugfixes und Verbesserungen; Beitrag zu automatisierten Tests">Implemented bug fixes and enhancements; contributed to automated testing efforts</li>
-                                </ul>
-                                <div class="exp-tech">
-                                    <span>Python</span>
-                                    <span>Django</span>
-                                    <span>PostgreSQL</span>
-                                    <span>REST APIs</span>
-                                    <span>JavaScript</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Methodologies & Tools -->
-                <div class="methodologies-section fade-in fade-in-delay-2">
-                    <h3 class="section-label" data-en="Methodologies & Tools" data-de="Methoden & Werkzeuge">Methodologies & Tools</h3>
-                    <div class="methodology-grid">
-                        <div class="methodology-card">
-                            <span class="methodology-icon">🔄</span>
-                            <h5>Agile / Scrum</h5>
-                            <p data-en="Sprint planning, daily standups, retrospectives" data-de="Sprint-Planung, Daily Standups, Retrospektiven">Sprint planning, daily standups, retrospectives</p>
-                        </div>
-                        <div class="methodology-card">
-                            <span class="methodology-icon">🔧</span>
-                            <h5>CI/CD</h5>
-                            <p data-en="TeamCity, automated testing, continuous deployment" data-de="TeamCity, automatisierte Tests, kontinuierliche Bereitstellung">TeamCity, automated testing, continuous deployment</p>
-                        </div>
-                        <div class="methodology-card">
-                            <span class="methodology-icon">📝</span>
-                            <h5 data-en="Code Quality" data-de="Code-Qualität">Code Quality</h5>
-                            <p data-en="Code reviews, testing, documentation" data-de="Code-Reviews, Tests, Dokumentation">Code reviews, testing, documentation</p>
-                        </div>
-                        <div class="methodology-card">
-                            <span class="methodology-icon">🐳</span>
-                            <h5>DevOps</h5>
-                            <p data-en="Docker, containerization, Linux environments" data-de="Docker, Containerisierung, Linux-Umgebungen">Docker, containerization, Linux environments</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Skills Section -->
-                <div class="skills-section fade-in fade-in-delay-2">
-                    <h3 class="section-label" data-en="Technical Skills" data-de="Technische Fähigkeiten">Technical Skills</h3>
-                    
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h5>
-                                <span class="skill-icon">💻</span>
-                                <span data-en="Programming" data-de="Programmierung">Programming</span>
-                            </h5>
-                            <div class="skill-tags">
-                                <span>Python</span>
-                                <span>Django</span>
-                                <span>FastAPI</span>
-                                <span>REST APIs</span>
-                                <span>PostgreSQL</span>
-                                <span>SQLite</span>
-                                <span>Git</span>
-                                <span>Docker</span>
-                                <span>Linux</span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-category">
-                            <h5>
-                                <span class="skill-icon">🤖</span>
-                                <span data-en="AI & LLM" data-de="AI & LLM">AI & LLM</span>
-                            </h5>
-                            <div class="skill-tags">
-                                <span>OpenAI API</span>
-                                <span>Claude API</span>
-                                <span>Prompt Engineering</span>
-                                <span>RAG Pipelines</span>
-                                <span>LangChain</span>
-                                <span>FAISS</span>
-                                <span>Chroma</span>
-                                <span>Embeddings</span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-category">
-                            <h5>
-                                <span class="skill-icon">🔧</span>
-                                <span data-en="DevOps & Tools" data-de="DevOps & Tools">DevOps & Tools</span>
-                            </h5>
-                            <div class="skill-tags">
-                                <span>Docker</span>
-                                <span>TeamCity (CI/CD)</span>
-                                <span>Git</span>
-                                <span>Bash Scripting</span>
-                                <span>Linux</span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-category">
-                            <h5>
-                                <span class="skill-icon">🌐</span>
-                                <span data-en="Web" data-de="Web">Web</span>
-                            </h5>
-                            <div class="skill-tags">
-                                <span>HTML</span>
-                                <span>CSS</span>
-                                <span>JavaScript</span>
-                                <span>Bootstrap</span>
-                                <span>Jinja2</span>
-                                <span>JSON</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Certifications Section -->
-                <div class="certifications-section fade-in fade-in-delay-3">
-                    <h3 class="section-label" data-en="Certifications & Continuous Learning" data-de="Zertifikate & Weiterbildung">Certifications & Continuous Learning</h3>
-                    <div class="cert-grid">
-                        <div class="cert-card">
-                            <span class="cert-icon">🎓</span>
-                            <div class="cert-info">
-                                <h5 data-en="Master's in Information Systems" data-de="Master in Informationssystemen">Master's in Information Systems</h5>
-                                <p data-en="German equivalent recognized (ZAB)" data-de="Deutsche Gleichwertigkeit anerkannt (ZAB)">German equivalent recognized (ZAB)</p>
-                            </div>
-                            <span class="cert-badge verified">✓ Verified</span>
-                        </div>
-                        <div class="cert-card">
-                            <span class="cert-icon">🐍</span>
-                            <div class="cert-info">
-                                <h5>Python & Django Development</h5>
-                                <p data-en="3+ years professional experience" data-de="3+ Jahre Berufserfahrung">3+ years professional experience</p>
-                            </div>
-                        </div>
-                        <div class="cert-card">
-                            <span class="cert-icon">🧠</span>
-                            <div class="cert-info">
-                                <h5>AI & LLM Engineering</h5>
-                                <p data-en="Prompt engineering, RAG systems, API integration" data-de="Prompt Engineering, RAG-Systeme, API-Integration">Prompt engineering, RAG systems, API integration</p>
-                            </div>
-                        </div>
-                        <div class="cert-card">
-                            <span class="cert-icon">🇩🇪</span>
-                            <div class="cert-info">
-                                <h5 data-en="German Language" data-de="Deutsche Sprache">German Language</h5>
-                                <p data-en="Currently A2, actively learning" data-de="Aktuell A2, aktiv lernend">Currently A2, actively learning</p>
-                            </div>
-                            <span class="cert-badge learning" data-en="In Progress" data-de="In Bearbeitung">In Progress</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 4: Projects -->
-        <section id="projects" class="content-section">
-            <div class="section-container">
-                <div class="section-header fade-in">
-                    <span class="section-tag" data-en="Portfolio" data-de="Portfolio">Portfolio</span>
-                    <h2 data-en="Projects" data-de="Projekte">Projects</h2>
-                    <p class="section-subtitle" data-en-html="AI engineering projects demonstrating practical applications" data-de-html="AI-Engineering-Projekte mit praktischen Anwendungen">AI engineering projects demonstrating practical applications</p>
-                </div>
-
-                <!-- Projects Overview -->
-                <div class="projects-overview fade-in fade-in-delay-1">
-                    <div class="overview-card">
-                        <div class="overview-icon">💡</div>
-                        <div class="overview-content">
-                            <h4 data-en="About These Projects" data-de="Über diese Projekte">About These Projects</h4>
-                            <p data-en="AI projects built with Python, FastAPI, and LLM APIs. Click a level to filter." data-de="KI-Projekte mit Python, FastAPI und LLM-APIs. Klicken Sie auf ein Level zum Filtern.">AI projects built with Python, FastAPI, and LLM APIs. Click a level to filter.</p>
-                            <div class="filter-buttons">
-                                <button class="filter-btn active" data-filter="all" data-en="All" data-de="Alle">All</button>
-                                <button class="filter-btn easy" data-filter="easy" data-en="🟢 Easy" data-de="🟢 Einfach">🟢 Easy</button>
-                                <button class="filter-btn medium" data-filter="medium" data-en="🟡 Medium" data-de="🟡 Mittel">🟡 Medium</button>
-                                <button class="filter-btn advanced" data-filter="advanced" data-en="🔴 Advanced" data-de="🔴 Fortgeschritten">🔴 Advanced</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- All Projects Grid -->
-                <div class="projects-grid fade-in fade-in-delay-1" id="projectsGrid">
-                    <!-- 🟢 EASY PROJECTS -->
-                    <div class="project-card" data-level="easy">
-                        <div class="project-status-badge done">Completed</div>
-                        <div class="project-icon">🧾</div>
-                        <h4>AI Expense & Receipt Parser</h4>
-                        <p>Extracts expenses from text, receipts (OCR), and invoices with multi-language support.</p>
-                        <div class="project-tech"><span>Python</span><span>FastAPI</span><span>OpenAI</span><span>OCR</span></div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
-                            <span>100%</span>
-                        </div>
-                        <a href="https://github.com/brahimengineerit-ux/ai-expense-assistant" target="_blank" class="project-link">View on GitHub →</a>
-                    </div>
-                    <div class="project-card" data-level="easy">
-                        <div class="project-status-badge done">Completed</div>
-                        <div class="project-icon">📝</div>
-                        <h4>AI Form-to-JSON Converter</h4>
-                        <p>Converts free-text input into clean JSON following a strict schema.</p>
-                        <div class="project-tech"><span>Python</span><span>FastAPI</span><span>OpenAI</span><span>JSON Schema</span></div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
-                            <span>100%</span>
-                        </div>
-                        <a href="https://github.com/brahimengineerit-ux/AI-Form-to-JSON-Converter" target="_blank" class="project-link">View on GitHub →</a>
-                    </div>
-                    <div class="project-card" data-level="easy">
-                        <div class="project-status-badge done">Completed</div>
-                        <div class="project-icon">📄</div>
-                        <h4>AI Resume Analyzer</h4>
-                        <p>Analyzes CV text, highlights skills/gaps, and provides job matching scores.</p>
-                        <div class="project-tech"><span>Python</span><span>FastAPI</span><span>OpenAI</span><span>PyPDF2</span></div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
-                            <span>100%</span>
-                        </div>
-                        <a href="https://github.com/brahimengineerit-ux/AI-Resume-Analyzer" target="_blank" class="project-link">View on GitHub →</a>
-                    </div>
-                    <div class="project-card" data-level="easy">
-                        <div class="project-status-badge in-progress">In Progress</div>
-                        <div class="project-icon">💬</div>
-                        <h4>AI Customer Support Auto-Responder</h4>
-                        <p>Generates consistent replies based on predefined support rules.</p>
-                        <div class="project-tech"><span>Python</span><span>FastAPI</span><span>LLM</span></div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 20%"></div></div>
-                            <span>20%</span>
-                        </div>
-                        <a href="https://github.com/brahimengineerit-ux/AI-Customer-Support-Auto-Responder" target="_blank" class="project-link">View on GitHub →</a>
-                    </div>
-
-                    <!-- 🟡 MEDIUM PROJECTS -->
-                    <div class="project-card" data-level="medium">
-                        <div class="project-status-badge done">Completed</div>
-                        <div class="project-icon">📚</div>
-                        <h4>Document Q&A Assistant (RAG)</h4>
-                        <p>Answers questions strictly from uploaded documents using RAG.</p>
-                        <div class="project-tech"><span>Python</span><span>FAISS</span><span>Embeddings</span><span>LangChain</span></div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
-                            <span>100%</span>
-                        </div>
-                        <a href="https://github.com/yourusername/document-qa-rag" target="_blank" class="project-link">View on GitHub →</a>
-                    </div>
-                    <div class="project-card" data-level="medium">
-                        <div class="project-status-badge todo">Planned</div>
-                        <div class="project-icon">🏢</div>
-                        <h4>Company Policy Assistant</h4>
-                        <p>Employees ask questions about internal rules and policies.</p>
-                        <div class="project-tech"><span>RAG</span><span>FastAPI</span><span>Chroma</span></div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                            <span>0%</span>
-                        </div>
-                        <a href="#" class="project-link">Coming Soon →</a>
-                    </div>
-                    <div class="project-card" data-level="medium">
-                        <div class="project-status-badge todo">Planned</div>
-                        <div class="project-icon">🚫</div>
-                        <h4>AI Error Log Explainer</h4>
-                        <p>Explains backend errors and suggests fixes.</p>
-                        <div class="project-tech"><span>Python</span><span>LLM API</span><span>Logging</span></div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                            <span>0%</span>
-                        </div>
-                        <a href="#" class="project-link">Coming Soon →</a>
-                    </div>
-                    <div class="project-card" data-level="medium">
-                        <div class="project-status-badge todo">Planned</div>
-                        <div class="project-icon">🔍</div>
-                        <h4>AI Code Review Assistant</h4>
-                        <p>Reviews code and flags readability or security issues.</p>
-                        <div class="project-tech"><span>Python</span><span>AST</span><span>LLM</span></div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                            <span>0%</span>
-                        </div>
-                        <a href="#" class="project-link">Coming Soon →</a>
-                    </div>
-
-                    <!-- 🔴 ADVANCED PROJECTS -->
-                    <div class="project-card" data-level="advanced">
-                        <div class="project-status-badge todo">Planned</div>
-                        <div class="project-icon">📂</div>
-                        <h4>Multi-Document RAG Assistant</h4>
-                        <p>Searches across multiple sources and compares answers.</p>
-                        <div class="project-tech"><span>RAG</span><span>FAISS</span><span>Multi-index</span></div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                            <span>0%</span>
-                        </div>
-                        <a href="#" class="project-link">Coming Soon →</a>
-                    </div>
-                    <div class="project-card" data-level="advanced">
-                        <div class="project-status-badge todo">Planned</div>
-                        <div class="project-icon">⚙️</div>
-                        <h4>AI Workflow Automation Engine</h4>
-                        <p>Chains multiple AI tasks together in automated pipelines.</p>
-                        <div class="project-tech"><span>Python</span><span>Celery</span><span>LLM</span></div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                            <span>0%</span>
-                        </div>
-                        <a href="#" class="project-link">Coming Soon →</a>
-                    </div>
-                    <div class="project-card" data-level="advanced">
-                        <div class="project-status-badge todo">Planned</div>
-                        <div class="project-icon">🧠</div>
-                        <h4>AI Chat Memory Service</h4>
-                        <p>Adds persistent conversation memory to AI applications.</p>
-                        <div class="project-tech"><span>Python</span><span>Redis</span><span>LLM</span></div>
-                        <div class="project-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                            <span>0%</span>
-                        </div>
-                        <a href="#" class="project-link">Coming Soon →</a>
-                    </div>
-                </div>
-
-                <div class="github-cta fade-in fade-in-delay-2">
-                    <p data-en="All projects available on:" data-de="Alle Projekte verfügbar auf:">All projects available on:</p>
-                    <a href="https://github.com/brahimengineerit-ux?tab=repositories" target="_blank" class="github-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        Click here
+            <ul class="contact-list">
+                <li>
+                    <a href="mailto:brahim.engineer.it@gmail.com" class="contact-row">
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value">brahim.engineer.it@gmail.com</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
                     </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 5: Contact -->
-        <section id="contact" class="content-section">
-            <div class="section-container">
-                <div class="section-header fade-in">
-                    <span class="section-tag" data-en="Get in touch" data-de="Kontaktieren">Get in touch</span>
-                    <h2 data-en="Contact" data-de="Kontakt">Contact</h2>
-                    <p class="section-subtitle" data-en-html="Let's connect and discuss opportunities" data-de-html="Lassen Sie uns in Kontakt treten">Let's connect and discuss opportunities</p>
-                </div>
-
-                <div class="contact-grid fade-in fade-in-delay-1">
-                    <a href="mailto:brahim.engineer.it@gmail.com" class="contact-card">
-                        <div class="contact-icon">✉️</div>
-                        <div class="contact-info">
-                            <span class="contact-label" data-en="Email" data-de="E-Mail">Email</span>
-                            <span class="contact-value">brahim.engineer.it@gmail.com</span>
-                        </div>
-                        <span class="contact-arrow">→</span>
+                </li>
+                <li>
+                    <a href="https://github.com/brahimengineerit-ux" target="_blank" rel="noopener" class="contact-row">
+                        <span class="contact-label">GitHub</span>
+                        <span class="contact-value">brahimengineerit-ux</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
                     </a>
-
-                    <a href="https://github.com/brahimengineerit-ux" target="_blank" class="contact-card">
-                        <div class="contact-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                        </div>
-                        <div class="contact-info">
-                            <span class="contact-label">GitHub</span>
-                            <span class="contact-value">Brahim Ait-Mlouk</span>
-                        </div>
-                        <span class="contact-arrow">→</span>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/brahim-3b636b385" target="_blank" rel="noopener" class="contact-row">
+                        <span class="contact-label">LinkedIn</span>
+                        <span class="contact-value">Brahim Ait-Mlouk</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
                     </a>
-
-                    <a href="https://www.linkedin.com/in/brahim-3b636b385" target="_blank" class="contact-card">
-                        <div class="contact-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </div>
-                        <div class="contact-info">
-                            <span class="contact-label">LinkedIn</span>
-                            <span class="contact-value">Brahim Ait-Mlouk</span>
-                        </div>
-                        <span class="contact-arrow">→</span>
-                    </a>
-
-                    <div class="contact-card location">
-                        <div class="contact-icon">📍</div>
-                        <div class="contact-info">
-                            <span class="contact-label" data-en="Current Location" data-de="Aktueller Standort">Current Location</span>
-                            <span class="contact-value" data-en="Rabat, Morocco" data-de="Rabat, Marokko">Rabat, Morocco</span>
-                        </div>
+                </li>
+                <li>
+                    <div class="contact-row contact-row-static">
+                        <span class="contact-label" data-en="Location" data-de="Standort">Location</span>
+                        <span class="contact-value">Rabat, Morocco · UTC+1</span>
                     </div>
-                </div>
+                </li>
+            </ul>
 
-                <div class="contact-cta fade-in fade-in-delay-2">
-                    <p data-en="Let's discuss how I can contribute to your team" data-de="Lassen Sie uns besprechen, wie ich zu Ihrem Team beitragen kann">Let's discuss how I can contribute to your team</p>
-                    <a href="mailto:brahim.engineer.it@gmail.com" class="cta-button large">
-                        <span data-en="Contact me" data-de="Kontaktieren Sie mich">Contact me</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12,5 19,12 12,19"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <!-- JavaScript -->
-    <script src="js/main.js?v=3.0"></script>
+</main>
+
+<button class="to-top" id="to-top" aria-label="Back to top">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- Keyboard hint (shown once per session) -->
+<div class="kbd-hint" id="kbd-hint" role="status">
+    <span class="kbd-key">↑</span>
+    <span class="kbd-key">↓</span>
+    <span data-en="to navigate sections" data-de="für Sektionen-Navigation">to navigate sections</span>
+</div>
+
+<script src="js/main.js?v=4.7"></script>
 </body>
 </html>
