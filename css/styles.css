@@ -790,3 +790,427 @@ nav ul {
 @media (max-width: 480px) {
     .section-container { padding: 1.25rem 0.85rem 3rem; }
 }
+
+/* ============================================
+   NEURAL DARK — Part 2: Home Section
+   Hero · Tech Pills · Bento Grid · Interests
+   ============================================ */
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+    margin-bottom: 2.5rem;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.9rem;
+    background: rgba(16, 185, 129, 0.10);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 99px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--success);
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+}
+
+.badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
+    animation: badge-pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes badge-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.6; transform: scale(1.3); }
+}
+
+.hero-title {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+}
+
+.title-line { display: block; color: var(--text-primary); }
+
+.gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-description {
+    font-size: 0.97rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    max-width: 580px;
+    margin-bottom: 1.75rem;
+}
+
+.hero-description strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* CV Buttons */
+.hero-cv-buttons {
+    display: flex;
+    gap: 0.875rem;
+    flex-wrap: wrap;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all var(--transition-base);
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.cta-button.cv-btn,
+.hero-cv-buttons .cv-btn {
+    background: var(--gradient-primary);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+    border: 1px solid transparent;
+}
+
+.cta-button.cv-btn:hover,
+.hero-cv-buttons .cv-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(99, 102, 241, 0.50);
+    filter: brightness(1.08);
+    color: #fff;
+}
+
+.cta-button.cv-btn svg,
+.hero-cv-buttons .cv-btn svg {
+    transition: transform var(--transition-base);
+}
+
+.cta-button.cv-btn:hover svg,
+.hero-cv-buttons .cv-btn:hover svg {
+    transform: translateY(2px);
+}
+
+.cta-button.large {
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    background: var(--gradient-primary);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+}
+
+.cta-button.large:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(99, 102, 241, 0.50);
+    color: #fff;
+}
+
+/* Language-based CV button visibility */
+.hero-cv-buttons .cv-btn[data-lang-show="de"] { display: none; }
+[data-lang="de"] .hero-cv-buttons .cv-btn[data-lang-show="en"] { display: none; }
+[data-lang="de"] .hero-cv-buttons .cv-btn[data-lang-show="de"] { display: inline-flex; }
+
+.cv-btn[data-lang-show="de"] { display: none; }
+[data-lang="de"] .cv-btn[data-lang-show="en"] { display: none; }
+[data-lang="de"] .cv-btn[data-lang-show="de"] { display: inline-flex; }
+
+/* ============================================
+   TECH STACK PILLS
+   ============================================ */
+.tech-stack {
+    margin-bottom: 2rem;
+}
+
+.tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.85rem;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    border-radius: 99px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--indigo-light);
+    transition: all var(--transition-base);
+    cursor: default;
+}
+
+.tech-pill:hover {
+    background: rgba(99, 102, 241, 0.16);
+    border-color: rgba(99, 102, 241, 0.40);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.20);
+}
+
+.pill-icon { font-size: 0.85rem; }
+
+/* ============================================
+   BENTO GRID
+   ============================================ */
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.bento-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.4rem;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.bento-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.bento-card:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--glow-card);
+}
+
+.bento-card:hover::before { opacity: 1; }
+
+.bento-large { grid-column: span 1; }
+
+.bento-header {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 1rem;
+}
+
+.bento-icon { font-size: 1.35rem; }
+
+.bento-header h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Check list inside bento */
+.check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+}
+
+.check-icon {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--success);
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.22);
+    border-radius: 4px;
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+/* ============================================
+   LANGUAGE BARS (inside bento)
+   ============================================ */
+.language-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.language-item {}
+
+.language-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.language-badge {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 99px;
+}
+
+.language-badge.native {
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--indigo-light);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+.language-badge.fluent {
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--success);
+    border: 1px solid rgba(16, 185, 129, 0.22);
+}
+
+.language-badge.learning {
+    background: rgba(245, 158, 11, 0.12);
+    color: var(--warning);
+    border: 1px solid rgba(245, 158, 11, 0.22);
+}
+
+.language-bar {
+    height: 4px;
+    background: var(--border-color);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.language-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 99px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   INTEREST / CORE EXPERTISE CARDS
+   ============================================ */
+.interests-section { margin-bottom: 1rem; }
+
+.interests-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.interest-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.4rem;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.interest-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-base);
+}
+
+.interest-card:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--glow-card);
+}
+
+.interest-card:hover::after { transform: scaleX(1); }
+
+.interest-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.interest-card h5 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+}
+
+.interest-card p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+}
+
+/* ============================================
+   HOME — RESPONSIVE
+   ============================================ */
+@media (max-width: 640px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .interests-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-cv-buttons {
+        flex-direction: column;
+    }
+
+    .hero-cv-buttons .cv-btn {
+        justify-content: center;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+}
