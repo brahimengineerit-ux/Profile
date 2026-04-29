@@ -597,7 +597,23 @@ ul, ol { list-style: none; }
 }
 
 .container {
-    margin:5px 70px 5px 70px;;
+    max-width: 720px;
+    margin: 5px 70px 5px 70px;
+}
+
+@media (min-width: 1400px) {
+    /* On very wide screens, center the column instead of pinning it left */
+    .container {
+        margin: 5px auto;
+    }
+}
+
+@media (max-width: 900px) {
+    /* On mobile, drop the side margin so content has room to breathe */
+    .container {
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
 }
 
 /* --------------------------------------------------------
