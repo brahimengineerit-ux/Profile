@@ -1214,3 +1214,372 @@ nav ul {
         font-size: 1.8rem;
     }
 }
+
+/* ============================================
+   NEURAL DARK — Part 3: Services & Education
+   ============================================ */
+
+/* ============================================
+   SERVICES GRID
+   ============================================ */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.service-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    border-radius: inherit;
+}
+
+.service-card > * { position: relative; z-index: 1; }
+
+.service-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--glow-card);
+}
+
+.service-card.service-featured {
+    border-color: rgba(99, 102, 241, 0.28);
+    background: rgba(99, 102, 241, 0.06);
+}
+
+.service-card.service-featured::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+}
+
+.service-card.service-cta-card {
+    background: rgba(236, 72, 153, 0.05);
+    border-color: rgba(236, 72, 153, 0.20);
+    align-items: flex-start;
+}
+
+.service-icon-wrap {
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+.service-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.service-card p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.service-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.25rem;
+}
+
+.service-bullets li {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.45;
+}
+
+.service-bullets li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--indigo-light);
+    font-weight: 700;
+}
+
+.service-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--gradient-primary);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all var(--transition-base);
+    margin-top: auto;
+}
+
+.service-cta-btn:hover {
+    transform: translateX(3px);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.40);
+    color: #fff;
+}
+
+.service-cta-btn svg {
+    transition: transform var(--transition-base);
+}
+.service-cta-btn:hover svg { transform: translateX(3px); }
+
+/* ============================================
+   PROCESS STEPS
+   ============================================ */
+.process-section { margin-top: 2rem; }
+
+.process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.process-step {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.process-step:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+    transform: translateX(4px);
+}
+
+.process-connector {
+    width: 2px;
+    height: 18px;
+    background: linear-gradient(180deg, rgba(99,102,241,0.4) 0%, rgba(236,72,153,0.4) 100%);
+    margin-left: 2.25rem;
+    flex-shrink: 0;
+}
+
+.step-number {
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 2.5rem;
+    padding-top: 2px;
+}
+
+.step-content h5 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+}
+
+.step-content p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+}
+
+/* ============================================
+   EDUCATION TIMELINE
+   ============================================ */
+.education-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.edu-card {
+    display: flex;
+    gap: 1.25rem;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.4rem;
+    transition: all var(--transition-base);
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+
+.edu-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.edu-card:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+    transform: translateX(4px);
+    box-shadow: var(--glow-card);
+}
+
+.edu-card:hover::before { opacity: 1; }
+
+.edu-year-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--indigo-light);
+    background: var(--indigo-dim);
+    border: 1px solid rgba(99, 102, 241, 0.22);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 2px;
+}
+
+.edu-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.edu-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.edu-logo-fallback {
+    font-size: 1.4rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.edu-content { flex: 1; }
+
+.edu-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 99px;
+    margin-bottom: 0.5rem;
+}
+
+.edu-type.master {
+    background: rgba(99, 102, 241, 0.12);
+    color: var(--indigo-light);
+    border: 1px solid rgba(99, 102, 241, 0.22);
+}
+
+.edu-type.bachelor {
+    background: rgba(6, 182, 212, 0.12);
+    color: var(--accent);
+    border: 1px solid rgba(6, 182, 212, 0.22);
+}
+
+.edu-type.bac {
+    background: rgba(245, 158, 11, 0.10);
+    color: var(--warning);
+    border: 1px solid rgba(245, 158, 11, 0.20);
+}
+
+.edu-content h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+}
+
+.edu-institution {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.edu-location {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.edu-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--success);
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.18);
+    padding: 0.3rem 0.7rem;
+    border-radius: 8px;
+    margin-top: 0.25rem;
+}
+
+/* ============================================
+   SERVICES & EDUCATION — RESPONSIVE
+   ============================================ */
+@media (max-width: 640px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .edu-card {
+        flex-wrap: wrap;
+    }
+
+    .edu-year-badge {
+        width: 100%;
+    }
+
+    .process-connector {
+        margin-left: 1.5rem;
+    }
+}
