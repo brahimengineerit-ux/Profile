@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.10/dist/dotlottie-wc.js" type="module"></script>
-    <link rel="stylesheet" href="css/styles.css?v=4.8">
+    <link rel="stylesheet" href="css/styles.css?v=4.9">
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Inter,sans-serif' font-size='16' font-weight='700' fill='white'%3EB%3C/text%3E%3C/svg%3E">
 </head>
@@ -70,8 +70,9 @@
                 <li><a href="#" class="nav-link" data-section="services" onclick="document.getElementById('sidebar').classList.remove('open');document.body.classList.remove('menu-open');var t=document.getElementById('menu-toggle');if(t)t.classList.remove('is-open');"><span data-en="Services" data-de="Leistungen">Services</span><span class="nav-key">02</span></a></li>
                 <li><a href="#" class="nav-link" data-section="experience" onclick="document.getElementById('sidebar').classList.remove('open');document.body.classList.remove('menu-open');var t=document.getElementById('menu-toggle');if(t)t.classList.remove('is-open');"><span data-en="Experience" data-de="Erfahrung">Experience</span><span class="nav-key">03</span></a></li>
                 <li><a href="#" class="nav-link" data-section="projects" onclick="document.getElementById('sidebar').classList.remove('open');document.body.classList.remove('menu-open');var t=document.getElementById('menu-toggle');if(t)t.classList.remove('is-open');"><span data-en="Projects" data-de="Projekte">Projects</span><span class="nav-key">04</span></a></li>
-                <li><a href="#" class="nav-link" data-section="education" onclick="document.getElementById('sidebar').classList.remove('open');document.body.classList.remove('menu-open');var t=document.getElementById('menu-toggle');if(t)t.classList.remove('is-open');"><span data-en="Education" data-de="Bildung">Education</span><span class="nav-key">05</span></a></li>
-                <li><a href="#" class="nav-link" data-section="contact" onclick="document.getElementById('sidebar').classList.remove('open');document.body.classList.remove('menu-open');var t=document.getElementById('menu-toggle');if(t)t.classList.remove('is-open');"><span data-en="Contact" data-de="Kontakt">Contact</span><span class="nav-key">06</span></a></li>
+                <li><a href="#" class="nav-link" data-section="writing" onclick="document.getElementById('sidebar').classList.remove('open');document.body.classList.remove('menu-open');var t=document.getElementById('menu-toggle');if(t)t.classList.remove('is-open');"><span data-en="Writing" data-de="Artikel">Writing</span><span class="nav-key">05</span></a></li>
+                <li><a href="#" class="nav-link" data-section="education" onclick="document.getElementById('sidebar').classList.remove('open');document.body.classList.remove('menu-open');var t=document.getElementById('menu-toggle');if(t)t.classList.remove('is-open');"><span data-en="Education" data-de="Bildung">Education</span><span class="nav-key">06</span></a></li>
+                <li><a href="#" class="nav-link" data-section="contact" onclick="document.getElementById('sidebar').classList.remove('open');document.body.classList.remove('menu-open');var t=document.getElementById('menu-toggle');if(t)t.classList.remove('is-open');"><span data-en="Contact" data-de="Kontakt">Contact</span><span class="nav-key">07</span></a></li>
             </ul>
         </nav>
 
@@ -175,7 +176,7 @@
                 </div>
                 <div class="kv">
                     <span class="kv-label" data-en="Work model" data-de="Arbeitsmodell">Work model</span>
-                    <span class="kv-value" data-en="Remote · Hybrid · On-site" data-de="Remote · Hybrid · Vor Ort">Remote · Hybrid</span>
+                    <span class="kv-value" data-en="Remote · Hybrid" data-de="Remote · Hybrid">Remote · Hybrid</span>
                 </div>
                 <div class="kv">
                     <span class="kv-label" data-en="Experience" data-de="Erfahrung">Experience</span>
@@ -194,6 +195,9 @@
                     <li class="chip">Python</li>
                     <li class="chip">FastAPI</li>
                     <li class="chip">Django</li>
+                    <li class="chip">Flask</li>
+                    <li class="chip">JavaScript</li>
+                    <li class="chip">HTML/CSS</li>
                     <li class="chip">OpenAI API</li>
                     <li class="chip">Claude API</li>
                     <li class="chip">LangChain</li>
@@ -206,6 +210,7 @@
                     <li class="chip">Linux</li>
                     <li class="chip">Git</li>
                     <li class="chip">CI/CD</li>
+                    <li class="chip">AWS</li>
                 </ul>
             </div>
 
@@ -464,30 +469,6 @@
                 <p class="section-sub" data-en="A selection of AI engineering projects — Python, FastAPI, and LLM APIs in practice." data-de="Eine Auswahl von AI-Engineering-Projekten — Python, FastAPI und LLM-APIs in der Praxis.">A selection of AI engineering projects — Python, FastAPI, and LLM APIs in practice.</p>
             </header>
 
-            <!-- Featured project -->
-            <article class="featured" data-level="medium">
-                <div class="featured-pattern" aria-hidden="true"></div>
-                <div class="featured-tag">
-                    <span class="featured-dot" aria-hidden="true"></span>
-                    <span data-en="Featured project" data-de="Hervorgehobenes Projekt">Featured project</span>
-                </div>
-                <h3 class="featured-title" data-en="Document Q&amp;A Assistant" data-de="Dokumenten-Q&amp;A Assistent">Document Q&amp;A Assistant</h3>
-                <p class="featured-desc" data-en="A retrieval-augmented generation pipeline that answers questions strictly from the documents you upload. FAISS vector store, hybrid retrieval, citation-aware responses, and an evaluation harness for accuracy regression." data-de="Eine RAG-Pipeline, die Fragen ausschließlich anhand der hochgeladenen Dokumente beantwortet. FAISS-Vektorspeicher, hybrides Retrieval, Quellenbezug und Evaluations-Harness gegen Genauigkeits-Regressionen.">A retrieval-augmented generation pipeline that answers questions strictly from the documents you upload. FAISS vector store, hybrid retrieval, citation-aware responses, and an evaluation harness for accuracy regression.</p>
-                <div class="featured-meta">
-                    <span class="featured-status done">
-                        <span class="status-mark" aria-hidden="true"></span>
-                        <span data-en="Completed" data-de="Fertig">Completed</span>
-                    </span>
-                    <ul class="chip-list chip-list-sm featured-chips">
-                        <li class="chip">Python</li><li class="chip">FAISS</li><li class="chip">LangChain</li><li class="chip">Embeddings</li>
-                    </ul>
-                    <a href="https://github.com/brahimengineerit-ux" class="featured-link" target="_blank" rel="noopener">
-                        <span data-en="View on GitHub" data-de="Auf GitHub ansehen">View on GitHub</span>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
-                    </a>
-                </div>
-            </article>
-
             <!-- Search -->
             <div class="psearch" role="search">
                 <svg class="psearch-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -642,13 +623,69 @@
     </section>
 
     <!-- ====================================================
+         SECTION: WRITING
+    ==================================================== -->
+    <section id="writing" class="section">
+        <div class="container">
+
+            <header class="section-head">
+                <span class="section-num">05</span>
+                <h2 class="section-title" data-en="Writing" data-de="Artikel">Writing</h2>
+                <p class="section-sub" data-en="Notes on AI engineering — RAG, LLM patterns, Python tooling. Published on Medium." data-de="Notizen zur AI-Entwicklung — RAG, LLM-Muster, Python-Tooling. Veröffentlicht auf Medium.">Notes on AI engineering — RAG, LLM patterns, Python tooling. Published on Medium.</p>
+            </header>
+
+            <!-- Roadmap intro -->
+            <p class="writing-intro muted">
+                <span data-en="First posts shipping soon. Below is what's coming next — follow on Medium to get them as they're published." data-de="Erste Beiträge erscheinen demnächst. Unten steht, was als Nächstes kommt — auf Medium folgen für Updates.">First posts shipping soon. Below is what's coming next — follow on Medium to get them as they're published.</span>
+            </p>
+
+            <!-- Search -->
+            <div class="psearch" role="search">
+                <svg class="psearch-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="search" id="writing-search" class="psearch-input" autocomplete="off" spellcheck="false" data-en-placeholder="Search articles, topics, tags…" data-de-placeholder="Artikel, Themen, Tags suchen…" placeholder="Search articles, topics, tags…" aria-label="Search articles" oninput="(function(inp){var q=inp.value.trim().toLowerCase();var rows=document.querySelectorAll('#writing-list .warticle');var visible=0;rows.forEach(function(r){var t=(r.querySelector('.warticle-title')||{}).textContent||'';var d=(r.querySelector('.warticle-desc')||{}).textContent||'';var c=Array.prototype.map.call(r.querySelectorAll('.chip'),function(x){return x.textContent;}).join(' ');var hay=(t+' '+d+' '+c).toLowerCase();var match=!q||hay.indexOf(q)>-1;r.classList.toggle('hidden',!match);if(match)visible++;});var emp=document.getElementById('writing-empty');if(emp)emp.hidden=visible!==0;})(this);">
+                <kbd class="psearch-kbd" aria-hidden="true">/</kbd>
+            </div>
+
+            <!-- Upcoming articles (roadmap) -->
+            <ul class="writing-list" id="writing-list">
+
+                <li class="warticle">
+                    <div class="warticle-meta">
+                        <span class="warticle-num">001</span>
+                        <span class="warticle-status soon"><span class="status-mark"></span><span data-en="In progress" data-de="In Arbeit">In progress</span></span>
+                    </div>
+                    <h3 class="warticle-title" data-en="What is RAG, really? A practitioner's view" data-de="Was ist RAG wirklich? Aus Sicht eines Praktikers">What is RAG, really? A practitioner's view</h3>
+                    <p class="warticle-desc" data-en="Cutting through the buzzwords — how retrieval-augmented generation actually works, the parts that matter in production, and the parts you can skip." data-de="Hinter dem Buzzword — wie Retrieval-Augmented Generation tatsächlich funktioniert, was in Produktion zählt und was nicht.">Cutting through the buzzwords — how retrieval-augmented generation actually works, the parts that matter in production, and the parts you can skip.</p>
+                    <ul class="chip-list chip-list-sm">
+                        <li class="chip">RAG</li><li class="chip">LLM</li><li class="chip">Vector DB</li>
+                    </ul>
+                </li>
+
+            </ul>
+
+            <p class="plist-empty" id="writing-empty" hidden>
+                <span data-en="No articles match your search." data-de="Keine Artikel gefunden.">No articles match your search.</span>
+            </p>
+
+            <!-- Follow on Medium CTA -->
+            <div class="writing-cta">
+                <a href="https://medium.com/@brahim.engineer.it" target="_blank" rel="noopener" class="btn btn-primary">
+                    <span data-en="Follow on Medium" data-de="Auf Medium folgen">Follow on Medium</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ====================================================
          SECTION: EDUCATION
     ==================================================== -->
     <section id="education" class="section">
         <div class="container">
 
             <header class="section-head">
-                <span class="section-num">05</span>
+                <span class="section-num">06</span>
                 <h2 class="section-title" data-en="Education" data-de="Bildung">Education</h2>
                 <p class="section-sub" data-en="Computer science and software engineering — accredited equivalence to a German Master's." data-de="Informatik und Software-Engineering — anerkannte Gleichwertigkeit zum deutschen Master.">Computer science and software engineering — accredited equivalence to a German Master's.</p>
             </header>
@@ -691,8 +728,8 @@
                 <ul class="lang-list">
                     <li><span class="lang-name">Tamazight</span><span class="lang-level" data-en="Native" data-de="Muttersprache">Native</span></li>
                     <li><span class="lang-name" data-en="Arabic" data-de="Arabisch">Arabic</span><span class="lang-level" data-en="Native" data-de="Muttersprache">Native</span></li>
-                    <li><span class="lang-name" data-en="French" data-de="Französisch">French</span><span class="lang-level" data-en="Fluent" data-de="Fließend">intermdait</span></li>
-                    <li><span class="lang-name" data-en="English" data-de="Englisch">English</span><span class="lang-level" data-en="Fluent (C1)" data-de="Fließend (C1)">Fluent</span></li>
+                    <li><span class="lang-name" data-en="French" data-de="Französisch">French</span><span class="lang-level" data-en="intermdait" data-de="Mittel">intermdait</span></li>
+                    <li><span class="lang-name" data-en="English" data-de="Englisch">English</span><span class="lang-level" data-en="Fluent" data-de="Fließend ">Fluent</span></li>
                     <li><span class="lang-name" data-en="German" data-de="Deutsch">German</span><span class="lang-level" data-en="A2 — targeting B2" data-de="A2 — Ziel B2">A2 — targeting B2</span></li>
                 </ul>
             </div>
@@ -707,7 +744,7 @@
         <div class="container">
 
             <header class="section-head">
-                <span class="section-num">06</span>
+                <span class="section-num">07</span>
                 <h2 class="section-title" data-en="Contact" data-de="Kontakt">Contact</h2>
                 <p class="section-sub" data-en="The fastest way to reach me is email. I usually reply within 24 hours, Monday to Friday." data-de="Am schnellsten erreichen Sie mich per E-Mail. Ich antworte werktags meist innerhalb von 24 Stunden.">The fastest way to reach me is email. I usually reply within 24 hours, Monday to Friday.</p>
             </header>
@@ -741,6 +778,10 @@
                     </div>
                 </li>
             </ul>
+
+            <div class="contact-art" aria-hidden="true">
+                <dotlottie-wc src="https://lottie.host/f9ce5d7a-8998-4fad-aca0-e8002961bc24/4otgXsb5kt.lottie" autoplay loop></dotlottie-wc>
+            </div>
 
         </div>
     </section>

@@ -371,7 +371,7 @@ ul, ol { list-style: none; }
 
 .hero-art dotlottie-wc {
     width: 280px;
-    height: 280px;
+    height: 170px;
     display: block;
 }
 
@@ -1852,6 +1852,129 @@ a.prow-inner:hover .prow-num { color: var(--brand); }
 
 /* Backdrop is no longer used — fullscreen overlay replaces it */
 .sidebar-backdrop { display: none !important; }
+
+/* --------------------------------------------------------
+   Contact section animation
+-------------------------------------------------------- */
+.contact-art {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-art dotlottie-wc {
+    width: 280px;
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .contact-art { margin-top: 1.75rem; }
+    .contact-art dotlottie-wc { width: 300px; height: 146px; }
+}
+
+/* --------------------------------------------------------
+   Writing section
+-------------------------------------------------------- */
+.writing-intro {
+    margin-bottom: 2rem;
+}
+
+.writing-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg);
+    margin-bottom: 2rem;
+}
+
+.warticle {
+    padding: 1.5rem 1.75rem;
+    border-bottom: 1px solid var(--border);
+    transition: background .2s var(--ease), padding-left .25s var(--ease-out);
+}
+
+.warticle:last-child { border-bottom: 0; }
+
+.warticle:hover {
+    background: var(--bg-soft);
+    padding-left: 2rem;
+}
+
+.warticle-meta {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+    margin-bottom: .75rem;
+}
+
+.warticle-num {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    color: var(--fg-subtle);
+    letter-spacing: .05em;
+}
+
+.warticle-status {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-family: var(--font-mono);
+    font-size: .65rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: .15rem .55rem;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+}
+
+.warticle-status .status-mark {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+}
+
+.warticle-status.soon {
+    color: var(--warning);
+    border-color: color-mix(in oklab, var(--warning), transparent 60%);
+}
+
+.warticle-status.planned {
+    color: var(--fg-subtle);
+}
+
+.warticle-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin-bottom: .55rem;
+    line-height: 1.3;
+}
+
+.warticle-desc {
+    font-size: .92rem;
+    color: var(--fg-muted);
+    line-height: 1.65;
+    max-width: 62ch;
+    margin-bottom: .85rem;
+}
+
+.writing-cta {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+    .warticle { padding: 1.25rem; }
+    .warticle:hover { padding-left: 1.25rem; }
+    .warticle-title { font-size: 1rem; }
+    .warticle-desc { font-size: .88rem; }
+}
 
 /* --------------------------------------------------------
    Print

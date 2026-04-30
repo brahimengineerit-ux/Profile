@@ -89,7 +89,7 @@
     ----------------------------------------------------- */
     const navLinks = $$('.nav-link, .brand[data-section]');
     const sections = $$('.section');
-    const order = ['home', 'services', 'experience', 'projects', 'education', 'contact'];
+    const order = ['home', 'services', 'experience', 'projects', 'writing', 'education', 'contact'];
 
     const goTo = (id) => {
         sections.forEach(s => s.classList.toggle('active', s.id === id));
