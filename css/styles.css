@@ -1824,13 +1824,23 @@ a.prow-inner:hover .prow-num { color: var(--brand); }
     .featured-meta { gap: .75rem; }
     .featured-link { margin-left: 0; }
 
-    .plist-head { grid-template-columns: 36px 1fr 80px; }
-    .plist-col-status { display: none; }
-    .prow-inner { grid-template-columns: 36px 1fr 80px; padding: .9rem .25rem; }
+    .plist-head {
+        grid-template-columns: 36px 1fr auto;
+    }
+    .plist-col-stack { display: none; }
+    .plist-col-status { text-align: right; }
+    .prow-inner {
+        grid-template-columns: 36px 1fr auto;
+        padding: .9rem .25rem;
+    }
     a.prow-inner:hover { padding-left: .5rem; }
     .prow-stack { display: none; }
-    .prow-status { grid-column: 3; align-self: start; }
-    .prow-status span:last-child { display: none; }
+    .prow-status {
+        grid-column: auto;
+        align-self: start;
+        justify-content: flex-end;
+    }
+    .prow-status span:last-child { display: inline; }
     .prow-desc { display: none; }
 
     .process { grid-template-columns: 1fr; }
