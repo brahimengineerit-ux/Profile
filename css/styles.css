@@ -1093,6 +1093,12 @@ body.menu-open { overflow: hidden; }
     border-radius: 3px;
 }
 
+.role-tag-intern {
+    color: var(--brand);
+    border-color: var(--brand);
+    background: var(--brand-soft);
+}
+
 .role-title {
     font-size: 1.05rem;
     font-weight: 600;
