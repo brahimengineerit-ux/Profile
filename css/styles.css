@@ -92,7 +92,7 @@ ul, ol { list-style: none; }
 ::selection { background: var(--fg); color: var(--bg); }
 
 /* --------------------------------------------------------
-   Background — dot grid + cursor halo
+   Background: dot grid + cursor halo
 -------------------------------------------------------- */
 .bg-layer {
     position: fixed;
@@ -190,7 +190,7 @@ ul, ol { list-style: none; }
     margin-left: 2.4rem;
 }
 
-/* Status block — live time + presence */
+/* Status block: live time + presence */
 .status-block {
     display: flex;
     align-items: center;
@@ -433,7 +433,7 @@ ul, ol { list-style: none; }
 }
 
 /* --------------------------------------------------------
-   Eyebrow variant for the topbar (legacy — hidden everywhere)
+   Eyebrow variant for the topbar (legacy, hidden everywhere)
 -------------------------------------------------------- */
 .eyebrow-topbar { display: none !important; }
 
@@ -1860,7 +1860,7 @@ a.prow-inner:hover .prow-num { color: var(--brand); }
     .lede { font-size: .98rem; }
 }
 
-/* Backdrop is no longer used — fullscreen overlay replaces it */
+/* Backdrop is no longer used; fullscreen overlay replaces it */
 .sidebar-backdrop { display: none !important; }
 
 /* --------------------------------------------------------

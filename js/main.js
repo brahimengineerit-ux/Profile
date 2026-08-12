@@ -1,6 +1,6 @@
 /* ========================================================
    Brahim Ait-Mlouk · Portfolio v4.3
-   Vanilla JS — routing, theme, lang, motion, project search.
+   Vanilla JS: routing, theme, lang, motion, project search.
 ======================================================== */
 
 (function () {
